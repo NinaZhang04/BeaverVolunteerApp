@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InfoEditPage">
+
+    <TextView
+        android:id="@+id/tvAskEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:text="Email: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAskPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Password: "
+        app:layout_constraintStart_toStartOf="@+id/tvAskEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tvAskEmail" />
+
+    <TextView
+        android:id="@+id/tvAskFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="First Name:"
+        app:layout_constraintStart_toStartOf="@+id/tvAskPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tvAskPassword" />
+
+    <TextView
+        android:id="@+id/tvAskLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Last Name: "
+        app:layout_constraintStart_toStartOf="@+id/tvAskFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/tvAskFirstName" />
+
+    <TextView
+        android:id="@+id/tvAskSchoolStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="School Status: "
+        app:layout_constraintStart_toStartOf="@+id/tvAskLastName"
+        app:layout_constraintTop_toBottomOf="@+id/tvAskLastName" />
+
+    <TextView
+        android:id="@+id/askUserGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Grade: "
+        app:layout_constraintStart_toStartOf="@+id/tvAskSchoolStatus"
+        app:layout_constraintTop_toBottomOf="@+id/tvAskSchoolStatus" />
+
+    <TextView
+        android:id="@+id/askSchoolAttended"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="School Attended: "
+        app:layout_constraintStart_toStartOf="@+id/askUserGrade"
+        app:layout_constraintTop_toBottomOf="@+id/askUserGrade" />
+
+    <TextView
+        android:id="@+id/askCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Country: "
+        app:layout_constraintStart_toStartOf="@+id/askSchoolAttended"
+        app:layout_constraintTop_toBottomOf="@+id/askSchoolAttended" />
+
+    <TextView
+        android:id="@+id/askProvinceState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Province/State: "
+        app:layout_constraintStart_toStartOf="@+id/askCountry"
+        app:layout_constraintTop_toBottomOf="@+id/askCountry" />
+
+    <TextView
+        android:id="@+id/askCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="City: "
+        app:layout_constraintStart_toStartOf="@+id/askProvinceState"
+        app:layout_constraintTop_toBottomOf="@+id/askProvinceState" />
+
+    <TextView
+        android:id="@+id/askAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Address: "
+        app:layout_constraintStart_toStartOf="@+id/askCity"
+        app:layout_constraintTop_toBottomOf="@+id/askCity" />
+
+    <EditText
+        android:id="@+id/inputEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvAskEmail"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/inputPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/inputEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/inputEmailAddress" />
+
+    <EditText
+        android:id="@+id/inputFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/inputPassword"
+        app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
+
+    <EditText
+        android:id="@+id/inputLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/inputFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/inputFirstName" />
+
+    <Spinner
+        android:id="@+id/inputSchoolStatus"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:entries="@array/schoolStatus"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="@+id/inputLastName"
+        app:layout_constraintTop_toBottomOf="@+id/inputLastName" />
+
+    <EditText
+        android:id="@+id/inputGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:ems="10"
+        android:hint='If not in school enter "not in school"'
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="185dp"
+        tools:layout_editor_absoluteY="218dp" />
+
+    <EditText
+        android:id="@+id/inputSchoolAttended"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="185dp"
+        tools:layout_editor_absoluteY="259dp" />
+
+
+
+    <EditText
+        android:id="@+id/inputCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/inputSchoolAttended"
+        app:layout_constraintTop_toBottomOf="@+id/inputSchoolAttended" />
+
+    <EditText
+        android:id="@+id/inputProvince"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/inputCountry"
+        app:layout_constraintTop_toBottomOf="@+id/inputCountry" />
+
+    <EditText
+        android:id="@+id/inputCity"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/inputProvince"
+        app:layout_constraintTop_toBottomOf="@+id/inputProvince" />
+
+    <EditText
+        android:id="@+id/inputAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/inputCity"
+        app:layout_constraintTop_toBottomOf="@+id/inputCity" />
+
+    <Button
+        android:id="@+id/infoSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        tools:layout_editor_absoluteX="59dp"
+        tools:layout_editor_absoluteY="594dp" />
+
+    <Button
+        android:id="@+id/infoCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputAddress" />
+
+    <TextView
+        android:id="@+id/errorMessageForInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

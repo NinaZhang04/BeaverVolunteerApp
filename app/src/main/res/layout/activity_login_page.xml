@@ -10,12 +10,13 @@
         android:id="@+id/editLoginPagePassword4"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Enter Password:"
         android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/editLoginPageEmailAddress4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editLoginPageEmailAddress4"
         app:layout_constraintTop_toBottomOf="@+id/editLoginPageEmailAddress4" />
 
@@ -35,11 +36,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <!--- Google sign in button-->
     <EditText
         android:id="@+id/editLoginPageEmailAddress4"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Enter Email:"
         android:inputType="textEmailAddress"
@@ -53,20 +56,32 @@
         android:id="@+id/loginButton4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="24dp"
         android:text="Sign In"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/editLoginPagePassword4"
+        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintStart_toStartOf="@+id/editLoginPagePassword4"
+        app:layout_constraintTop_toBottomOf="@+id/editLoginPagePassword4" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="Register"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/editLoginPagePassword4"
         app:layout_constraintStart_toStartOf="@+id/editLoginPagePassword4"
         app:layout_constraintTop_toBottomOf="@+id/editLoginPagePassword4" />
 
-
-    <!--- Google sign in button-->
     <com.google.android.gms.common.SignInButton
         android:id="@+id/googleSignInButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="684dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

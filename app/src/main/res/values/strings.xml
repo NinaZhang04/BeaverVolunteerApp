@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">BeaverVolunteerAppJava</string>
-    <string name="server_client_id">950380129293-hditlf6aoi7l2afbhkcns218qo8npedu.apps.googleusercontent.com</string>
+    <string name="server_client_id">950380129293-m98sj4hbg6pl5hgsribtg8kj7a3bsmui.apps.googleusercontent.com</string>
     <string name="title_activity_login_landing_page">LoginLandingPage</string>
+    <string-array name="schoolStatus">
+        <item>Elementary School</item>
+        <item>High School</item>
+        <item>CEGEP</item>
+        <item>University</item>
+        <item>Other School System</item>
+        <item>Other School System</item>
+    </string-array>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -92,5 +100,14 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_landing_page">landingPage</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 </resources>
