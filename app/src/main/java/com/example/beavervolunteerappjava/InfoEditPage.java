@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -96,6 +97,22 @@ public class InfoEditPage extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+        //Clear out whoever is logged in currently
+        AuthUI.getInstance()
+                .signOut(InfoEditPage.this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                        if(currentUser != null){
+
+                        }
+                        else{
+                            //reload(); reload the page since no one signed in
+                        }
+                    }
+                });
+
+
         infoSubmit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -142,52 +159,25 @@ public class InfoEditPage extends AppCompatActivity {
 
 
                 if(accountInfoOk) {
+                    createUserAccountWithEmail(stringInputs[0], stringInputs[1]);
+                }
+                else{
 
-                    mDatabase = FirebaseDatabase.getInstance().getReference();
-                    // check if the userId exists
-                    String userID = randomIdGenerator();
-
-
-
-
-                    /**
-                    mDatabase.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            if (!task.isSuccessful()) {
-                                Log.e("firebase", "Error getting data", task.getException());
-                                showToastInfoEdit("Unable to connect to database, please try again later");
-                            }
-                            else {
-                                Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                                //for (DataSnapshot snapshot: task.getChildren()) {
-                                   // for (DataSnapshot messageSnapshot: snapshot.child("mensagem").getChildren()) {
-                                //    listView.add(messageSnapshot.child("textoMensagem").getValue().toString());
-                                   //}
-                                //}/
-                            }
-                        }
-                    });
-                    **/
-
-
-                    userAccount newUser = new userAccount(
-                            stringInputs[0], stringInputs[1],
-                            stringInputs[2], stringInputs[3],
-                            stringInputs[4], stringInputs[5],
-                            stringInputs[6], stringInputs[7],
-                            stringInputs[8], stringInputs[9],
-                            stringInputs[10],userID);
-                    //Do something with newUser, like upload it to the database
-
-                    createAccount(stringInputs[0], stringInputs[1]);
-                    mDatabase.child("users").child(userID).setValue(newUser);
                 }
                 Log.d(TAG,"===========" + accountInfoOk + "===========");
 
             }
         });
 
+
+
+        //When cancel is clicked
+        infoCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(InfoEditPage.this, LoginPage.class));
+            }
+        });
     }
 
     public userAccount infoEdit(String pageComingFrom){
@@ -247,6 +237,7 @@ public class InfoEditPage extends AppCompatActivity {
         Toast.makeText(InfoEditPage.this, text, Toast.LENGTH_LONG).show();
     }
 
+
     public String randomIdGenerator(){
         String randomID = "";
         String randomLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -259,33 +250,48 @@ public class InfoEditPage extends AppCompatActivity {
     }
 
 
-    public void createAccount(String email, String password){
+    public void createUserAccountWithEmail(String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            Log.d(TAG, "==================================createUserWithEmail:success");
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            updateDataBase(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            showToastInfoEdit("Authentication failed.");
-                            updateUI(null);
+                            Log.d(TAG, "==================================createUserWithEmail:failure", task.getException());
+                            showToastInfoEdit("Account has already signed up or user cannot be created");
+                            updateDataBase(null);
                         }
                     }
                 });
     }
 
-    private void updateUI(FirebaseUser user){
+    private void updateDataBase(FirebaseUser user){
         if(user != null){
-            Log.d(TAG,"LOGGGGIGNNNNNNNN===============================================================");
-            //Do things after it is logged in
+            Log.d(TAG,"LOGGGGIGNNNNNNNN :)))))))))))))))))))))))))))))))))))))))");
+            //get the Uid of newly created user
+            String uid = user.getUid();
+            //get reference from database
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            //create newUser object for upload
+            userAccount newUser = new userAccount(
+                    stringInputs[0], stringInputs[1],
+                    stringInputs[2], stringInputs[3],
+                    stringInputs[4], stringInputs[5],
+                    stringInputs[6], stringInputs[7],
+                    stringInputs[8], stringInputs[9],
+                    stringInputs[10],uid);
+            //Load the information of the new user to the database
+            mDatabase.child("users").child(uid).setValue(newUser);
+            showToastInfoEdit("Account created successfully. Returning to sign in page");
+            startActivity(new Intent(InfoEditPage.this, LoginPage.class));
         }
         else{
-
+            Log.d(TAG, "login failed. >:( >:( >:( >:( >:( >:O >:((((((((((");
         }
     }
 

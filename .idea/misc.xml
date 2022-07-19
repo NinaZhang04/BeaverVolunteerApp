@@ -3,9 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/healt/AndroidStudioProjects/BeaverVolunteerAppJava/app/src/main/res/layout-w1240dp/content_scrolling.xml" value="0.12" />
+        <entry key="..\:/Users/healt/AndroidStudioProjects/BeaverVolunteerAppJava/app/src/main/res/layout-w936dp/content_scrolling.xml" value="0.1" />
+        <entry key="..\:/Users/healt/AndroidStudioProjects/BeaverVolunteerAppJava/app/src/main/res/layout/activity_info_edit_page.xml" value="0.25" />
         <entry key="..\:/Users/healt/AndroidStudioProjects/BeaverVolunteerAppJava/app/src/main/res/layout/activity_login_landing_page.xml" value="0.264" />
+        <entry key="..\:/Users/healt/AndroidStudioProjects/BeaverVolunteerAppJava/app/src/main/res/layout/activity_login_page.xml" value="0.11770833333333333" />
         <entry key="..\:/Users/healt/AndroidStudioProjects/BeaverVolunteerAppJava/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/Users/healt/AndroidStudioProjects/BeaverVolunteerAppJava/app/src/main/res/layout/activity_user_landingpage.xml" value="0.176" />
         <entry key="..\:/Users/healt/AndroidStudioProjects/BeaverVolunteerAppJava/app/src/main/res/layout/content_scrolling.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/healt/AndroidStudioProjects/BeaverVolunteerAppJava/app/src/main/res/layout/fragment_first.xml" value="0.11770833333333333" />
       </map>
     </option>
   </component>

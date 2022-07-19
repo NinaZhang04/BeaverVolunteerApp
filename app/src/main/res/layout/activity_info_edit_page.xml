@@ -156,17 +156,20 @@
         android:entries="@array/schoolStatus"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="@+id/inputLastName"
+        app:layout_constraintStart_toStartOf="@+id/inputLastName"
         app:layout_constraintTop_toBottomOf="@+id/inputLastName" />
 
     <EditText
         android:id="@+id/inputGrade"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
+        android:layout_marginTop="13dp"
         android:ems="10"
         android:hint='If not in school enter "not in school"'
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="218dp" />
+        app:layout_constraintEnd_toEndOf="@+id/inputSchoolStatus"
+        app:layout_constraintStart_toStartOf="@+id/inputSchoolStatus"
+        app:layout_constraintTop_toBottomOf="@+id/inputSchoolStatus" />
 
     <EditText
         android:id="@+id/inputSchoolAttended"
@@ -174,9 +177,9 @@
         android:layout_height="30dp"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="259dp" />
-
+        app:layout_constraintEnd_toEndOf="@+id/inputGrade"
+        app:layout_constraintStart_toStartOf="@+id/inputGrade"
+        app:layout_constraintTop_toBottomOf="@+id/inputGrade" />
 
 
     <EditText
@@ -197,6 +200,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/inputCountry"
+        app:layout_constraintStart_toStartOf="@+id/inputCountry"
         app:layout_constraintTop_toBottomOf="@+id/inputCountry" />
 
     <EditText
@@ -207,6 +211,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/inputProvince"
+        app:layout_constraintStart_toStartOf="@+id/inputProvince"
         app:layout_constraintTop_toBottomOf="@+id/inputProvince" />
 
     <EditText
@@ -217,15 +222,20 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/inputCity"
+        app:layout_constraintStart_toStartOf="@+id/inputCity"
         app:layout_constraintTop_toBottomOf="@+id/inputCity" />
 
     <Button
         android:id="@+id/infoSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         android:text="Submit"
-        tools:layout_editor_absoluteX="59dp"
-        tools:layout_editor_absoluteY="594dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/infoCancel"

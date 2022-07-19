@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
@@ -34,8 +35,17 @@ import java.util.List;
 
 public class LoginPage extends AppCompatActivity{
     static private final String TAG= "BeaverMainActivity";
-    GoogleSignInClient mGoogleSignInClient;
+    //GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
+
+
+
+    EditText loginEmailAddress;
+    EditText loginPassword;
+
+    Button signInButton;
+    Button signOutButton;
+    Button registerButton;
 
 
     @Override
@@ -43,21 +53,30 @@ public class LoginPage extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
 
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        signInButton = (Button) findViewById(R.id.signInButton);
+        signOutButton = (Button) findViewById(R.id.signOutButton);
+        registerButton = (Button) findViewById(R.id.registerButton);
 
+        loginEmailAddress = (EditText) findViewById(R.id.loginEmailAddress);
+        loginPassword = (EditText) findViewById(R.id.loginPassword);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        //Google's sign in button
-        com.google.android.gms.common.SignInButton googlesign = (com.google.android.gms.common.SignInButton)findViewById(R.id.googleSignInButton);
 
+
+
+        // ===================The following are for google login, now it is disabled though===================
+        /**
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestEmail()
+        .build();
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        //Google's sign in button, currenly disabled
+        com.google.android.gms.common.SignInButton googlesign = (com.google.android.gms.common.SignInButton)findViewById(R.id.googleSignInButton);
         //If google sign in button is actually there
         if( googlesign != null) {
             googlesign.setOnClickListener(new View.OnClickListener() {
@@ -70,11 +89,43 @@ public class LoginPage extends AppCompatActivity{
 
         }
         //findViewById(R.id.googleSignInButton).setOnClickListener((View.OnClickListener) this);
+        **/
 
 
+        //When sign in button is clicked
+        signInButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 String tempEmailAddress = loginEmailAddress.getText().toString();
+                 String tempPassword = loginPassword.getText().toString();
+                 signInWithEmailAndPassword(tempEmailAddress,tempPassword);
+             }
+         });
+
+        //When sign out button is clicked
+        signOutButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                AuthUI.getInstance()
+                        .signOut(LoginPage.this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                showToast("Signed out");
+                            }
+                        });
+            }
+        });
+
+        //When register button is clicked
+        registerButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(LoginPage.this, InfoEditPage.class));
+            }
+        });
 
 
-
+        /**
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
@@ -83,7 +134,7 @@ public class LoginPage extends AppCompatActivity{
                 //Add in these later if want to set up login with facebook and twitter
                 //new AuthUI.IdpConfig.FacebookBuilder().build(),
                 //new AuthUI.IdpConfig.TwitterBuilder().build())
-                );
+        );
 
         // Create and launch sign-in intent
         Intent signInIntent = AuthUI.getInstance()
@@ -91,26 +142,20 @@ public class LoginPage extends AppCompatActivity{
                 .setAvailableProviders(providers)
                 .build();
         signInLauncher.launch(signInIntent);
-
-
-
-        //This method checks if register button is clicked
-        checkRegisterButton();
-
-
+        **/
     }
 
     protected void onStart() {
         super.onStart();
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        updateUI(account);
+        //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        //updateUI(account);
 
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Log.d(TAG,"==================================IM IN==================================");
+            startActivity(new Intent(LoginPage.this, userLandingPage.class));
         }
         else{
             //reload(); reload the page since no one signed in
@@ -125,19 +170,9 @@ public class LoginPage extends AppCompatActivity{
 
     }
 
-    private void updateUI(GoogleSignInAccount account) {
-
-        //account.getEmail();
-        if(account != null){
-            //Delete the following after testing
-            Log.d(TAG,"LOGGGGIGNNNNNNNN===============================================================");
-            Log.d(TAG, "Accountemail========"+ account.getEmail() + "=====");
-        }
-        else{
-            //REMEBER TO DO IT, PRINT THE WARNING MESSAGE SAYING LOGIN WITH GOOGLE FAILED. TRY AGAIN
-        }
-    }
-
+        //==========================Google stuff commented out START here ==================================
+    /**
+     * The google sign in option. Add it later if have the time
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         //mStartForResult.launch(signInIntent);
@@ -184,17 +219,8 @@ public class LoginPage extends AppCompatActivity{
 
         }
     }
-
-    public void checkRegisterButton(){
-        Button registerButton = (Button) findViewById(R.id.registerButton);
-        findViewById(R.id.registerButton).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(LoginPage.this, InfoEditPage.class));
-            }
-        });
-    }
-/**
+     **/
+    /**
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -207,6 +233,9 @@ public class LoginPage extends AppCompatActivity{
             handleSignInResult(task);
         }
     } **/
+
+    //==========================Google stuff commented out END here ==================================
+
 
     // See: https://developer.android.com/training/basics/intents/result
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
@@ -233,20 +262,20 @@ public class LoginPage extends AppCompatActivity{
         }
     }
 
-
-    public void createAccount(String email, String password){
-        mAuth.createUserWithEmailAndPassword(email, password)
+    public void signInWithEmailAndPassword(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
+                            Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
+                            Log.d(TAG,"++++++" + user.getEmail() + "+++++++++++++++++++++++IN with email++##############");
+                            updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginPage.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
@@ -254,18 +283,16 @@ public class LoginPage extends AppCompatActivity{
                     }
                 });
     }
-    /**
-     ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-     new ActivityResultCallback<ActivityResult>() {
-    @Override
-    public void onActivityResult(ActivityResult result) {
-    Log.d(TAG,"AM I BACKKKKKKKKKKKKKKKKKK?");
-    if (result.getResultCode() == Activity.RESULT_OK) {
-    Intent intent = result.getData();
-    Log.d(TAG,"PASS=============================================");
-    // Handle the Intent
+
+    private void updateUI(FirebaseUser account) {
+        if (account != null) {
+            startActivity(new Intent(LoginPage.this, userLandingPage.class));
+        } else {
+            showToast("Login failed. Email or password incorrect.");
+        }
     }
+
+    private void showToast(String text){
+        Toast.makeText(LoginPage.this, text, Toast.LENGTH_LONG).show();
     }
-    });
-     **/
 }

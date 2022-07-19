@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "950380129293",
+    "project_id": "beaversignin-1657212224710",
+    "storage_bucket": "beaversignin-1657212224710.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950380129293:android:598a6762b0c264a42fb944",
+        "android_client_info": {
+          "package_name": "com.example.beavervolunteerappjava"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950380129293-m98sj4hbg6pl5hgsribtg8kj7a3bsmui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.beavervolunteerappjava",
+            "certificate_hash": "18dd010d1870552a337dead077d4f46fbc6de87a"
+          }
+        },
+        {
+          "client_id": "950380129293-2fih1b4kpon6srd63nkl24avg4tk8t4o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo0Vvwg0V7Fj08C4CLO8LAy_RZWR6eTaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950380129293-2fih1b4kpon6srd63nkl24avg4tk8t4o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

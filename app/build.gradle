@@ -65,6 +65,8 @@ dependencies {
 
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
 
+    // Add Google Firebase Admin SDK
+    //implementation 'com.google.firebase:firebase-admin:9.0.0'
 
 
 
