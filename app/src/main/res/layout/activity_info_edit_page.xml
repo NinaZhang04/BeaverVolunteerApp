@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/tvAskEmail"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:text="Email: "
@@ -18,9 +18,8 @@
 
     <TextView
         android:id="@+id/tvAskPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_width="67dp"
+        android:layout_height="47dp"
         android:text="Password: "
         app:layout_constraintStart_toStartOf="@+id/tvAskEmail"
         app:layout_constraintTop_toBottomOf="@+id/tvAskEmail" />
@@ -28,8 +27,7 @@
     <TextView
         android:id="@+id/tvAskFirstName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="47dp"
         android:text="First Name:"
         app:layout_constraintStart_toStartOf="@+id/tvAskPassword"
         app:layout_constraintTop_toBottomOf="@+id/tvAskPassword" />
@@ -37,8 +35,7 @@
     <TextView
         android:id="@+id/tvAskLastName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="47dp"
         android:text="Last Name: "
         app:layout_constraintStart_toStartOf="@+id/tvAskFirstName"
         app:layout_constraintTop_toBottomOf="@+id/tvAskFirstName" />
@@ -46,8 +43,7 @@
     <TextView
         android:id="@+id/tvAskSchoolStatus"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="47dp"
         android:text="School Status: "
         app:layout_constraintStart_toStartOf="@+id/tvAskLastName"
         app:layout_constraintTop_toBottomOf="@+id/tvAskLastName" />
@@ -55,8 +51,7 @@
     <TextView
         android:id="@+id/askUserGrade"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="47dp"
         android:text="Grade: "
         app:layout_constraintStart_toStartOf="@+id/tvAskSchoolStatus"
         app:layout_constraintTop_toBottomOf="@+id/tvAskSchoolStatus" />
@@ -64,8 +59,7 @@
     <TextView
         android:id="@+id/askSchoolAttended"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="47dp"
         android:text="School Attended: "
         app:layout_constraintStart_toStartOf="@+id/askUserGrade"
         app:layout_constraintTop_toBottomOf="@+id/askUserGrade" />
@@ -73,8 +67,7 @@
     <TextView
         android:id="@+id/askCountry"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="47dp"
         android:text="Country: "
         app:layout_constraintStart_toStartOf="@+id/askSchoolAttended"
         app:layout_constraintTop_toBottomOf="@+id/askSchoolAttended" />
@@ -82,8 +75,7 @@
     <TextView
         android:id="@+id/askProvinceState"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="47dp"
         android:text="Province/State: "
         app:layout_constraintStart_toStartOf="@+id/askCountry"
         app:layout_constraintTop_toBottomOf="@+id/askCountry" />
@@ -91,8 +83,7 @@
     <TextView
         android:id="@+id/askCity"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="47dp"
         android:text="City: "
         app:layout_constraintStart_toStartOf="@+id/askProvinceState"
         app:layout_constraintTop_toBottomOf="@+id/askProvinceState" />
@@ -101,7 +92,6 @@
         android:id="@+id/askAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:text="Address: "
         app:layout_constraintStart_toStartOf="@+id/askCity"
         app:layout_constraintTop_toBottomOf="@+id/askCity" />
@@ -227,33 +217,31 @@
 
     <Button
         android:id="@+id/infoSubmit"
-        android:layout_width="wrap_content"
+        android:layout_width="91dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="80dp"
         android:text="Submit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/infoCancel"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/infoCancel"
-        android:layout_width="wrap_content"
+        android:layout_width="93dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputAddress" />
+        app:layout_constraintStart_toEndOf="@+id/infoSubmit" />
 
     <TextView
         android:id="@+id/errorMessageForInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/infoSubmit"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
