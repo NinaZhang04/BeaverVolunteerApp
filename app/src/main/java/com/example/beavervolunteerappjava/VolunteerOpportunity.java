@@ -46,6 +46,17 @@ public class VolunteerOpportunity {
         this.volunteerExpireTime = volunteerExpireTime;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "VolunteerOpportunity{" +
+                "opportunityName='" + opportunityName + '\'' +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", longDescription='" + longDescription + '\'' +
+                ", volunteerResponsibilities='" + volunteerResponsibilities + '\'' +
+                ", volunteerRequirement='" + volunteerRequirement + '\'' +
+                ", volunteerLocationAndHours='" + volunteerLocationAndHours + '\'' +
+                ", resgitrationDetails='" + resgitrationDetails + '\'' +
+                ", volunteerExpireTime='" + volunteerExpireTime + '\'' +
+                '}';
+    }
 }

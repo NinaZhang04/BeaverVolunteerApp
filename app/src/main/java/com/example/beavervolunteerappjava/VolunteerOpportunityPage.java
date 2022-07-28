@@ -6,6 +6,7 @@ package com.example.beavervolunteerappjava;
 
 
 
+import static android.content.ContentValues.TAG;
 import static java.sql.Types.NUMERIC;
 
 import androidx.annotation.NonNull;
@@ -54,9 +55,11 @@ import com.alibaba.excel.read.metadata.ReadSheet;
 //import com.alibaba.fastjson.JSON;
 
 public class VolunteerOpportunityPage extends AppCompatActivity {
-    //XSSFWorkbook workbook = null ;
-    //Sheet sheet = null;
-    private final static String TAG="VolunteerOpportunityPage";
+    Workbook workbook;
+    Sheet sheet = null;
+    File localFile;
+    final int opportunityAmount = 8;
+    //new// private final static String TAG="VolunteerOpportunityPage";
 
     FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
     //@Getter
@@ -75,7 +78,7 @@ public class VolunteerOpportunityPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(TAG,"WHAT IS  asdf  HAPPENING?????????????????????????????????????");
+        Log.d(TAG,"WHAT IS  asdf  HAPPENING?????????????????????????????????????");
        // jgkj
        // try{
           //  workbook= new XSSFWorkbook();
@@ -84,7 +87,7 @@ public class VolunteerOpportunityPage extends AppCompatActivity {
        // }
 
         setContentView(R.layout.activity_volunteer_opportunity_page);
-        Log.e(TAG,"WHAT IS HAPPENING?????????????????????????????????????");
+        //new// Log.e(TAG,"WHAT IS HAPPENING?????????????????????????????????????");
         downloadVolunteerData();
 
 
@@ -93,44 +96,140 @@ public class VolunteerOpportunityPage extends AppCompatActivity {
     public void downloadVolunteerData(){
         // Create a storage reference from our app
         StorageReference storageRef = firebaseStorage.getReference();
-        StorageReference pathReference = storageRef.child("volunteerOpportunityList.xlsx");
+        StorageReference pathReference = storageRef.child("Book3.xls");
 
 
         // Currently downloading the stored google sheet into memory, so keep in mind that the
         // Google sheet must not be too large, containing maximum, say, 100 opportunities?
 
-        File localFile = null;
 
+//new//
         try {
            // localFile = File.createTempFile("tempOpportunities", ".xlsx");
             //String path =  Environment.getExternalStorageDirectory();
-            File path1 =  Environment.getExternalStorageDirectory();
-            Log.e(TAG, "Environment.getExternalStorageDirectory(); IS " + path1.getAbsolutePath());
-            localFile = new File(path1.getAbsolutePath()+"/wenjie.xlsx");
+
+            //new// File path1 =  Environment.getExternalStorageDirectory();
+            //new//Log.e(TAG, "Environment.getExternalStorageDirectory(); IS " + path1.getAbsolutePath());
+            //new//localFile = new File(path1.getAbsolutePath()+"/wenjie.xlsx");
 
         } catch (Exception e) {
             e.printStackTrace();
             showToast("!volunteer opportunities not found. Check if connected to Wifi");
         }
-        File newTempFile = localFile;
-        if(localFile != null) {
-            pathReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    // Local temp file has been created
-                    // Read the entire sheet or whatever file and put it into a list of opportunity objects
-                    createVolunteerOpportunityList(newTempFile);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle any errors
-                }
-            });
-        }
+
+
+
+
+
+        localFile = new File(this.getCacheDir(), "opportunityListOnPhone.xls");
+        Log.d(TAG, "++++"+ localFile.getAbsolutePath());
+
+
+
+
+        pathReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                // Local temp file has been created
+                // Read the entire sheet or whatever file and put it into a list of opportunity objects
+
+
+                createOpportunityList();
+                //new// createVolunteerOpportunityList(newTempFile);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Log.d(TAG, "BRUH WHAT WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+            }
+        });
+
 
     }
 
+
+    public VolunteerOpportunity[] createOpportunityList(){
+
+        FileInputStream fileInputStream = null;
+
+        File file = localFile;
+        Log.d(TAG,"=========:   "+ file.getAbsolutePath());
+        try {
+            fileInputStream = new FileInputStream(file);
+            try {
+                workbook = new HSSFWorkbook(fileInputStream);
+
+            } catch (IOException e) {
+                Log.d(TAG, "OMG just work already");
+            }
+
+            //Get the first worksheet, because the second is not going to be searched
+            sheet = workbook.getSheetAt(0);
+
+            int rowCountOfSheet = 0;
+            for (Row row : sheet){
+                if (row.getRowNum() > 0){
+                    rowCountOfSheet++;
+                }
+            }
+
+            // Initialize the VolunteerOpportunity list here and add things in in the for loop below
+            VolunteerOpportunity[] returnThisList = new VolunteerOpportunity[rowCountOfSheet];
+
+            //This number keeps track of which index the for loop produced object should be put in
+            int indexOfReturnThisList = 0;
+
+            // Iterate through each row
+            for (Row row : sheet) {
+                Log.d(TAG, "Initialize list and count");
+                String[] opportunityDescriptions = new String[opportunityAmount];
+                int opportunityCount = 0;
+                if (row.getRowNum() > 0) {
+                    // Iterate through all the cells in a row (Excluding header row)
+                    Iterator<Cell> cellIterator = row.cellIterator();
+                    Log.d(TAG, "Creating one new object");
+
+                    while (cellIterator.hasNext()) {
+                        Cell cell = cellIterator.next();
+                        // Check cell type and format accordingly
+                        switch (cell.getCellType()) {
+                            case NUMERIC:
+                                // Print cell value
+                                Log.d(TAG, "----------" + cell.getNumericCellValue() + "----------");
+                                break;
+
+                            case STRING:
+                                Log.d(TAG,  opportunityCount + "++++++++++" + cell.getStringCellValue() + "++++++++++");
+                                opportunityDescriptions[opportunityCount] = cell.getStringCellValue();
+                                break;
+                        }
+                        opportunityCount++;
+                    }
+                }
+
+
+
+                //Create the object using the information obtained in one row
+                returnThisList[indexOfReturnThisList] =
+                        new VolunteerOpportunity(
+                            opportunityDescriptions[0], opportunityDescriptions[1],
+                            opportunityDescriptions[2], opportunityDescriptions[3],
+                            opportunityDescriptions[4], opportunityDescriptions[5],
+                            opportunityDescriptions[6], opportunityDescriptions[7]);
+                Log.d(TAG, returnThisList[indexOfReturnThisList].toString());
+            }
+            Log.d(TAG, "Helicopter brr brr ------------------------\n");
+        } catch (FileNotFoundException e) {
+            Log.d(TAG, "====================lol u didn't find file==================");
+            showToast("Volunteer Opportunities cannot be found. This could be server error or you are offline.");
+        }
+
+        // If file is not found, return null, and then another function that sees this function return null will know
+        // that the file did not exist
+        return null;
+    }
+
+    /** //new//
     public VolunteerOpportunity[] createVolunteerOpportunityList(File tempVolunteerFile){
         //File file = new File(VolunteerOpportunityPage.this.getExternalFilesDir(null), "tempOpportunities.xlsx");
         // create input stream
@@ -194,6 +293,7 @@ public class VolunteerOpportunityPage extends AppCompatActivity {
                 }
             }
         }
+     **/
         /**else {
 
             //EasyExcel.read("aaa", DemoData.class, new DemoDataListener()).sheet().doRead();
@@ -206,13 +306,13 @@ public class VolunteerOpportunityPage extends AppCompatActivity {
               //     // log.info("读取到一条数据{}", JSON.toJSONString(demoData));
                // }
             })).sheet().doRead();
-        }**/
+        }
 
         //file.delete();
 
         return null;
     }
-
+    **/
 
     private void showToast(String text){
         Toast.makeText(VolunteerOpportunityPage.this, text, Toast.LENGTH_LONG).show();

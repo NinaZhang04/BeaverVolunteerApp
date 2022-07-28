@@ -94,7 +94,7 @@ public class userLandingPage extends AppCompatActivity {
         volunteerPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(userLandingPage.this, OpportunityList.class));
+                startActivity(new Intent(userLandingPage.this, VolunteerOpportunityPage.class));
             }
         });
 
