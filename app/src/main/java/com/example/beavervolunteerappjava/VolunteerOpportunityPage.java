@@ -1,8 +1,8 @@
 package com.example.beavervolunteerappjava;
 
-import static android.content.ContentValues.TAG;
+//import static android.content.ContentValues.TAG;
 
-import static org.apache.poi.hssf.record.FormulaSpecialCachedValue.STRING;
+//import static org.apache.poi.hssf.record.FormulaSpecialCachedValue.STRING;
 
 
 
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -37,18 +38,53 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Scanner;
 
+//import com.alibaba.easyexcel.test.util.TestFileUtil;
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelReader;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.format.DateTimeFormat;
+import com.alibaba.excel.annotation.format.NumberFormat;
+import com.alibaba.excel.context.AnalysisContext;
+import com.alibaba.excel.converters.DefaultConverterLoader;
+//import com.alibaba.excel.enums.CellExtraTypeEnum;
+//import com.alibaba.excel.read.listener.PageReadListener;
+import com.alibaba.excel.read.listener.ReadListener;
+import com.alibaba.excel.read.metadata.ReadSheet;
+//import com.alibaba.excel.util.ListUtils;
+//import com.alibaba.fastjson.JSON;
 
 public class VolunteerOpportunityPage extends AppCompatActivity {
-    XSSFWorkbook workbook = new XSSFWorkbook();
-    Sheet sheet = null;
-
+    //XSSFWorkbook workbook = null ;
+    //Sheet sheet = null;
+    private final static String TAG="VolunteerOpportunityPage";
 
     FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+    //@Getter
+    //@Setter
+    //@EqualsAndHashCode
+    static public class DemoData {
+        private String string;
+        //private Date date;
+        private Double doubleData;
+    }
+
+    class DemoDataListener{
+        int j;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e(TAG,"WHAT IS  asdf  HAPPENING?????????????????????????????????????");
+       // jgkj
+       // try{
+          //  workbook= new XSSFWorkbook();
+       // }catch(Exception e) {
+         //   Log.w(TAG,"XSSFWorkbook got exception",e);
+       // }
+
         setContentView(R.layout.activity_volunteer_opportunity_page);
-        Log.w(TAG,"WHAT IS HAPPENING?????????????????????????????????????");
+        Log.e(TAG,"WHAT IS HAPPENING?????????????????????????????????????");
         downloadVolunteerData();
 
 
@@ -66,9 +102,13 @@ public class VolunteerOpportunityPage extends AppCompatActivity {
         File localFile = null;
 
         try {
-            localFile = File.createTempFile("tempOpportunities", "xlsx");
+           // localFile = File.createTempFile("tempOpportunities", ".xlsx");
+            //String path =  Environment.getExternalStorageDirectory();
+            File path1 =  Environment.getExternalStorageDirectory();
+            Log.e(TAG, "Environment.getExternalStorageDirectory(); IS " + path1.getAbsolutePath());
+            localFile = new File(path1.getAbsolutePath()+"/wenjie.xlsx");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             showToast("!volunteer opportunities not found. Check if connected to Wifi");
         }
@@ -99,54 +139,74 @@ public class VolunteerOpportunityPage extends AppCompatActivity {
         Boolean fileExist = false;
         Boolean workbookExist = false;
 
+
+        XSSFWorkbook  workbook = null;
         // if input stream can get the file, switch on the first confirmation switch
         try {
+            String filename = tempVolunteerFile.getAbsolutePath();
+            Log.e(TAG,"WENJIE filename IS " + filename);
             fileInputStream = new FileInputStream(tempVolunteerFile);
             fileExist = true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             showToast("~volunteer opportunities not found. Check if connected to Wifi");
         }
-
-        try {
-            if(fileInputStream != null) {
-                workbook = new XSSFWorkbook(fileInputStream);
-                workbookExist = true;
+        if(true) {
+            try {
+                if (fileInputStream != null) {
+                    workbook = new XSSFWorkbook(fileInputStream);
+                    workbookExist = true;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                showToast("\"volunteer opportunities not found. Check if connected to Wifi\"");
+            } catch( Exception al) {
+                al.printStackTrace();
+                showToast("\"volunteer opportunities not found. Check if connected to Wifi asdf\"");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            showToast("\"volunteer opportunities not found. Check if connected to Wifi\"");
-        }
+            Sheet sheet = null;
+            if (fileExist && workbookExist) {
+                sheet = workbook.getSheetAt(0);
+                // Iterate through each row
+                for (Row row : sheet) {
+                    if (row.getRowNum() > 0) {
+                        // Iterate through all the cells in a row (Excluding header row)
+                        Iterator<Cell> cellIterator = row.cellIterator();
 
-        if(fileExist && workbookExist){
-            sheet = workbook.getSheetAt(0);
-            // Iterate through each row
-            for (Row row : sheet) {
-                if (row.getRowNum() > 0) {
-                    // Iterate through all the cells in a row (Excluding header row)
-                    Iterator<Cell> cellIterator = row.cellIterator();
+                        while (cellIterator.hasNext()) {
+                            Cell cell = cellIterator.next();
 
-                    while (cellIterator.hasNext()) {
-                        Cell cell = cellIterator.next();
+                            // Check cell type and format accordingly
+                            switch (cell.getCellType()) {
+                                case NUMERIC:
+                                    // Print cell value
+                                    // Is this supposed to happen?
+                                    Log.d(TAG, "++++::::::: " + cell.getNumericCellValue());
+                                    break;
 
-                        // Check cell type and format accordingly
-                        switch (cell.getCellType()) {
-                            case NUMERIC:
-                                // Print cell value
-                                // Is this supposed to happen?
-                                Log.d(TAG, "++++::::::: " + cell.getNumericCellValue());
-                                break;
+                                case STRING:
+                                    Log.d(TAG, (cell.getStringCellValue()));
 
-                            case STRING:
-                                Log.d(TAG, (cell.getStringCellValue()));
-
-                                break;
+                                    break;
+                            }
                         }
                     }
                 }
             }
         }
+        /**else {
 
+            //EasyExcel.read("aaa", DemoData.class, new DemoDataListener()).sheet().doRead();
+            String fileName= "aaa";
+            EasyExcel.read(fileName, DemoData.class, new ReadListener<DemoData>(dataList -> {
+                @Override
+                public void invoke(DemoData data, AnalysisContext context) {}
+                Log.d(TAG,"READ LINE");
+               // for (DemoData demoData : dataList) {
+              //     // log.info("读取到一条数据{}", JSON.toJSONString(demoData));
+               // }
+            })).sheet().doRead();
+        }**/
 
         //file.delete();
 
