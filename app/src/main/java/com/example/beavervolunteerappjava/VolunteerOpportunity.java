@@ -59,4 +59,37 @@ public class VolunteerOpportunity {
                 ", volunteerExpireTime='" + volunteerExpireTime + '\'' +
                 '}';
     }
+
+
+    public String getOpportunityName(){
+        return opportunityName;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public String getVolunteerResponsibilities() {
+        return volunteerResponsibilities;
+    }
+
+    public String getVolunteerRequirement() {
+        return volunteerRequirement;
+    }
+
+    public String getVolunteerLocationAndHours() {
+        return volunteerLocationAndHours;
+    }
+
+    public String getResgitrationDetails() {
+        return resgitrationDetails;
+    }
+
+    public String getVolunteerExpireTime() {
+        return volunteerExpireTime;
+    }
 }
