@@ -30,6 +30,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustumViewVolunteerHolde
 
     @Override
     public void onBindViewHolder(@NonNull CustumViewVolunteerHolder holder, int position) {
+
         holder.opportunityName.setText(listOfOpportunity[position].getOpportunityName());
         holder.opportunityDescription.setText(listOfOpportunity[position].getShortDescription());
         holder.cardView.setOnClickListener(new View.OnClickListener(){
@@ -43,6 +44,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustumViewVolunteerHolde
 
     @Override
     public int getItemCount() {
-        return 2;
+        return listOfOpportunity.length;
     }
 }

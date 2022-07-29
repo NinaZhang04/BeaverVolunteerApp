@@ -61,7 +61,7 @@ public class VolunteerOpportunityPage extends AppCompatActivity implements Selec
     Workbook workbook;
     Sheet sheet = null;
     File localFile;
-    final int opportunityAmount = 8;
+    final int opportunityPropertiesAmount = 9;
 
 
 
@@ -114,8 +114,8 @@ public class VolunteerOpportunityPage extends AppCompatActivity implements Selec
         //new// Log.e(TAG,"WHAT IS HAPPENING?????????????????????????????????????");
         downloadVolunteerData();
         classListOfOpportunityList = createOpportunityList();
-        Log.d(TAG, "EXCUSEME WHYYYYYYY?:   " + classListOfOpportunityList[0].getOpportunityName());
-        Log.d(TAG, "EXCUSEME WHYYYYYYY?:   " + classListOfOpportunityList[1].getOpportunityName());
+        Log.d(TAG, "OpportunityReport:   " + classListOfOpportunityList[0].getOpportunityName());
+        Log.d(TAG, "OpportunityReport:   " + classListOfOpportunityList[0].getOpportunityId());
         if(classListOfOpportunityList != null){
             displayItems();
         }
@@ -223,7 +223,7 @@ public class VolunteerOpportunityPage extends AppCompatActivity implements Selec
             // Iterate through each row
             for (Row row : sheet) {
                 Log.d(TAG, "Initialize list and count");
-                String[] opportunityDescriptions = new String[opportunityAmount];
+                String[] opportunityDescriptions = new String[opportunityPropertiesAmount];
                 int opportunityCount = 0;
                 if (row.getRowNum() > 0) {
                     // Iterate through all the cells in a row (Excluding header row)
@@ -255,7 +255,8 @@ public class VolunteerOpportunityPage extends AppCompatActivity implements Selec
                                     opportunityDescriptions[0], opportunityDescriptions[1],
                                     opportunityDescriptions[2], opportunityDescriptions[3],
                                     opportunityDescriptions[4], opportunityDescriptions[5],
-                                    opportunityDescriptions[6], opportunityDescriptions[7]);
+                                    opportunityDescriptions[6], opportunityDescriptions[7],
+                                    opportunityDescriptions[8]);
                     Log.d(TAG, classListOfOpportunityList[indexOfReturnThisList].toString());
                     indexOfReturnThisList++;
                 }

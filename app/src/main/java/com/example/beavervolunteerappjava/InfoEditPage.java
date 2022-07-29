@@ -2,6 +2,8 @@ package com.example.beavervolunteerappjava;
 
 import static android.content.ContentValues.TAG;
 
+import static com.google.android.gms.common.util.ArrayUtils.newArrayList;
+
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
@@ -28,6 +30,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.apache.commons.compress.utils.Lists;
+
+import java.util.List;
 import java.util.Random;
 
 
@@ -278,15 +283,19 @@ public class InfoEditPage extends AppCompatActivity {
             //get reference from database
             mDatabase = FirebaseDatabase.getInstance().getReference();
             //create newUser object for upload
+            List<String> registeredListEmpty = newArrayList();
+            registeredListEmpty.add("A000000");
             userAccount newUser = new userAccount(
                     stringInputs[0], stringInputs[1],
                     stringInputs[2], stringInputs[3],
                     stringInputs[4], stringInputs[5],
                     stringInputs[6], stringInputs[7],
                     stringInputs[8], stringInputs[9],
-                    stringInputs[10],uid);
+                    stringInputs[10],uid, registeredListEmpty
+                    );
             //Load the information of the new user to the database
             mDatabase.child("users").child(uid).setValue(newUser);
+
             showToastInfoEdit("Account created successfully. Returning to sign in page");
             startActivity(new Intent(InfoEditPage.this, LoginPage.class));
         }

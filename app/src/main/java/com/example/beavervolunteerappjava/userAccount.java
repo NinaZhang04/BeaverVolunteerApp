@@ -1,5 +1,7 @@
 package com.example.beavervolunteerappjava;
 
+import java.util.List;
+
 public class userAccount {
     //declare all instance variables belonging to the user's acocunt
 
@@ -33,6 +35,8 @@ public class userAccount {
     private String cityOfLiving;
     private String addressLine;
 
+    private List<String> registeredList;
+
     //Unique userID, cannot be changed afterwards, will be randomly generated and assigned to user
     private String userID;
 
@@ -52,7 +56,8 @@ public class userAccount {
             String provinceOrStateOfLiving,
             String cityOfLiving,
             String addressLine,
-            String userID){
+            String userID,
+            List<String> registeredList){
             this.userEmail = userEmail;
             this.password = password;
             this.userFirstName = userFirstName;
@@ -65,7 +70,7 @@ public class userAccount {
             this.cityOfLiving = cityOfLiving;
             this.addressLine = addressLine;
             this.userID = userID;
-
+            this.registeredList = registeredList;
     }
 
 
@@ -116,4 +121,5 @@ public class userAccount {
 
     public String getUserID(){ return userID; }
 
+    public List<String> getRegisteredList() {return registeredList;}
 }

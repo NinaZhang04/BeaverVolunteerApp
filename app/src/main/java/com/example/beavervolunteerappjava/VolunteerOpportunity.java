@@ -11,7 +11,7 @@ public class VolunteerOpportunity {
     String volunteerLocationAndHours;
     String resgitrationDetails;
     String volunteerExpireTime;
-
+    String opportunityId;
 
     public VolunteerOpportunity(){
 
@@ -27,6 +27,7 @@ public class VolunteerOpportunity {
      * @param volunteerLocationAndHours
      * @param resgitrationDetails
      * @param volunteerExpireTime
+     * @param opportunityId
      */
     public VolunteerOpportunity(String opportunityName,
                                 String shortDescription,
@@ -35,7 +36,8 @@ public class VolunteerOpportunity {
                                 String volunteerRequirement,
                                 String volunteerLocationAndHours,
                                 String resgitrationDetails,
-                                String volunteerExpireTime) {
+                                String volunteerExpireTime,
+                                String opportunityId) {
         this.opportunityName = opportunityName;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
@@ -44,6 +46,7 @@ public class VolunteerOpportunity {
         this.volunteerLocationAndHours = volunteerLocationAndHours;
         this.resgitrationDetails = resgitrationDetails;
         this.volunteerExpireTime = volunteerExpireTime;
+        this.opportunityId = opportunityId;
     }
 
     @Override
@@ -57,6 +60,7 @@ public class VolunteerOpportunity {
                 ", volunteerLocationAndHours='" + volunteerLocationAndHours + '\'' +
                 ", resgitrationDetails='" + resgitrationDetails + '\'' +
                 ", volunteerExpireTime='" + volunteerExpireTime + '\'' +
+                ", opportunityId='" + opportunityId + '\'' +
                 '}';
     }
 
@@ -92,4 +96,6 @@ public class VolunteerOpportunity {
     public String getVolunteerExpireTime() {
         return volunteerExpireTime;
     }
+
+    public String getOpportunityId() {  return opportunityId;  }
 }
