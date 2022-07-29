@@ -20,4 +20,11 @@
     <style name="Theme.BeaverVolunteerAppJava.AppBarOverlay"
         parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.BeaverVolunteerAppJava.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="PopupCustomTheme">
+
+        <item name = "android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name = "android:windowCloseOnTouchOutside">true</item>
+    </style>
+
 </resources>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailedOpportunityPage">
+
+    <TextView
+        android:id="@+id/opportunityNameDetailPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="name_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/longDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/opportunityNameDetailPage"
+        app:layout_constraintStart_toStartOf="@+id/opportunityNameDetailPage"
+        app:layout_constraintTop_toBottomOf="@+id/opportunityNameDetailPage" />
+
+    <TextView
+        android:id="@+id/responsibilities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/longDescription"
+        app:layout_constraintStart_toStartOf="@+id/longDescription"
+        app:layout_constraintTop_toBottomOf="@+id/longDescription" />
+
+    <TextView
+        android:id="@+id/requirements"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/responsibilities"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/responsibilities"
+        app:layout_constraintTop_toBottomOf="@+id/responsibilities" />
+
+    <TextView
+        android:id="@+id/locationAndHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/requirements"
+        app:layout_constraintStart_toStartOf="@+id/requirements"
+        app:layout_constraintTop_toBottomOf="@+id/requirements" />
+
+    <Button
+        android:id="@+id/detailedResgistrationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Register"
+        app:layout_constraintEnd_toEndOf="@+id/goBackbuttonDetailedPage"
+        app:layout_constraintStart_toStartOf="@+id/goBackbuttonDetailedPage"
+        app:layout_constraintTop_toBottomOf="@+id/goBackbuttonDetailedPage" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="press the register button to receive registration details in your email!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailedResgistrationButton" />
+
+    <Button
+        android:id="@+id/goBackbuttonDetailedPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Back"
+        app:layout_constraintEnd_toEndOf="@+id/locationAndHours"
+        app:layout_constraintStart_toStartOf="@+id/locationAndHours"
+        app:layout_constraintTop_toBottomOf="@+id/locationAndHours" />
+</androidx.constraintlayout.widget.ConstraintLayout>

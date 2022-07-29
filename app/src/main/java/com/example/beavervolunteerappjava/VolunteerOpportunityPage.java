@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -69,8 +70,8 @@ public class VolunteerOpportunityPage extends AppCompatActivity implements Selec
     VolunteerOpportunity[] classListOfOpportunityList;
     CustomAdapter customAdapter;
 
-
-
+    //this will be used in detailed opportunity page so that class knows what opportunity should be displayed
+    public static VolunteerOpportunity currentlyViewingOpportunity;
 
 
     //new// private final static String TAG="VolunteerOpportunityPage";
@@ -80,8 +81,9 @@ public class VolunteerOpportunityPage extends AppCompatActivity implements Selec
     //
     @Override
     public void onItemClicked(VolunteerOpportunity opportunity) {
-        opportunity.getClass();
-        startActivity(new Intent(VolunteerOpportuintyPage.this, ))
+        currentlyViewingOpportunity = opportunity;
+        startActivity(new Intent(VolunteerOpportunityPage.this, DetailedOpportunityPage.class));
+
     }
 
     //@Getter

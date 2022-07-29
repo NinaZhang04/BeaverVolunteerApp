@@ -18,6 +18,9 @@
         android:theme="@style/Theme.BeaverVolunteerAppJava"
         tools:targetApi="31">
         <activity
+            android:name=".DetailedOpportunityPage"
+            android:exported="false" />
+        <activity
             android:name=".OpportunityList"
             android:exported="false" />
         <activity
@@ -29,6 +32,10 @@
         <activity
             android:name=".InfoEditPage"
             android:exported="false" />
+        <activity
+            android:name=".OpportunityPopUp"
+            android:exported="false"
+            android:theme="@style/PopupCustomTheme" />
         <activity
             android:name=".LoginPage"
             android:exported="true">
