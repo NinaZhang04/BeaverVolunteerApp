@@ -11,6 +11,8 @@ import static java.sql.Types.NUMERIC;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.os.Environment;
@@ -54,14 +56,34 @@ import com.alibaba.excel.read.metadata.ReadSheet;
 //import com.alibaba.excel.util.ListUtils;
 //import com.alibaba.fastjson.JSON;
 
-public class VolunteerOpportunityPage extends AppCompatActivity {
+public class VolunteerOpportunityPage extends AppCompatActivity implements SelectListener{
     Workbook workbook;
     Sheet sheet = null;
     File localFile;
     final int opportunityAmount = 8;
+
+
+
+    RecyclerView recyclerView;
+    //this is the list that gets passed into recycler view, which is the display list
+    VolunteerOpportunity[] classListOfOpportunityList;
+    CustomAdapter customAdapter;
+
+
+
+
+
     //new// private final static String TAG="VolunteerOpportunityPage";
 
     FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
+
+    //
+    @Override
+    public void onItemClicked(VolunteerOpportunity opportunity) {
+        opportunity.getClass();
+        startActivity(new Intent(VolunteerOpportuintyPage.this, ))
+    }
+
     //@Getter
     //@Setter
     //@EqualsAndHashCode
@@ -86,11 +108,27 @@ public class VolunteerOpportunityPage extends AppCompatActivity {
          //   Log.w(TAG,"XSSFWorkbook got exception",e);
        // }
 
-        setContentView(R.layout.activity_volunteer_opportunity_page);
+        setContentView(R.layout.activity_opportunity_list);
         //new// Log.e(TAG,"WHAT IS HAPPENING?????????????????????????????????????");
         downloadVolunteerData();
+        classListOfOpportunityList = createOpportunityList();
+        Log.d(TAG, "EXCUSEME WHYYYYYYY?:   " + classListOfOpportunityList[0].getOpportunityName());
+        Log.d(TAG, "EXCUSEME WHYYYYYYY?:   " + classListOfOpportunityList[1].getOpportunityName());
+        if(classListOfOpportunityList != null){
+            displayItems();
+        }
+        else{
+            showToast("!Cannot display opportunities. You may be offline or our server document is updating.");
+        }
 
+    }
 
+    private void displayItems() {
+        recyclerView = findViewById(R.id.recycler_main);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        customAdapter = new CustomAdapter(this, classListOfOpportunityList, this);
+        recyclerView.setAdapter(customAdapter);
     }
 
     public void downloadVolunteerData(){
@@ -134,7 +172,8 @@ public class VolunteerOpportunityPage extends AppCompatActivity {
                 // Read the entire sheet or whatever file and put it into a list of opportunity objects
 
 
-                createOpportunityList();
+                classListOfOpportunityList = createOpportunityList();
+
                 //new// createVolunteerOpportunityList(newTempFile);
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -174,7 +213,7 @@ public class VolunteerOpportunityPage extends AppCompatActivity {
             }
 
             // Initialize the VolunteerOpportunity list here and add things in in the for loop below
-            VolunteerOpportunity[] returnThisList = new VolunteerOpportunity[rowCountOfSheet];
+            classListOfOpportunityList = new VolunteerOpportunity[rowCountOfSheet];
 
             //This number keeps track of which index the for loop produced object should be put in
             int indexOfReturnThisList = 0;
@@ -205,28 +244,38 @@ public class VolunteerOpportunityPage extends AppCompatActivity {
                         }
                         opportunityCount++;
                     }
+
+
+
+                    //Create the object using the information obtained in one row
+                    classListOfOpportunityList[indexOfReturnThisList] =
+                            new VolunteerOpportunity(
+                                    opportunityDescriptions[0], opportunityDescriptions[1],
+                                    opportunityDescriptions[2], opportunityDescriptions[3],
+                                    opportunityDescriptions[4], opportunityDescriptions[5],
+                                    opportunityDescriptions[6], opportunityDescriptions[7]);
+                    Log.d(TAG, classListOfOpportunityList[indexOfReturnThisList].toString());
+                    indexOfReturnThisList++;
                 }
 
 
 
-                //Create the object using the information obtained in one row
-                returnThisList[indexOfReturnThisList] =
-                        new VolunteerOpportunity(
-                            opportunityDescriptions[0], opportunityDescriptions[1],
-                            opportunityDescriptions[2], opportunityDescriptions[3],
-                            opportunityDescriptions[4], opportunityDescriptions[5],
-                            opportunityDescriptions[6], opportunityDescriptions[7]);
-                Log.d(TAG, returnThisList[indexOfReturnThisList].toString());
+
+
             }
-            Log.d(TAG, "Helicopter brr brr ------------------------\n");
+
+            Log.d(TAG, "the list stored in this class is updated------------------------\n");
+            return classListOfOpportunityList;
+
         } catch (FileNotFoundException e) {
             Log.d(TAG, "====================lol u didn't find file==================");
             showToast("Volunteer Opportunities cannot be found. This could be server error or you are offline.");
+            return null;
         }
 
         // If file is not found, return null, and then another function that sees this function return null will know
         // that the file did not exist
-        return null;
+
     }
 
 
