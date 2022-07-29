@@ -3,6 +3,7 @@ package com.example.beavervolunteerappjava;
 import static android.content.ContentValues.TAG;
 import static com.example.beavervolunteerappjava.VolunteerOpportunityPage.currentlyViewingOpportunity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -100,56 +103,99 @@ public class DetailedOpportunityPage extends AppCompatActivity {
             // Get the current user's ID
             String userId = user.getUid();
             // Use the above ID to check in the realtime database about their registered list
-            ValueEventListener registeredListListener = new ValueEventListener() {
+
+            mDatabase.child("users").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // Get userAccount object and use the values to update the UI
-                    userAccount firebaseAccountInfo = dataSnapshot.child("users").child(userId).getValue(userAccount.class);
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (!task.isSuccessful()) {
 
-                    // get the account's registered opportunity list
-                    List<String> firebaseAccountRegisteredList = firebaseAccountInfo.getRegisteredList();
-                    Boolean stopRepeatOpportunityFound = false;
-                    //iterate through what the user has registered
-
-                    for(int i = 0; i< firebaseAccountRegisteredList.size(); i++){
-                        if(stopRepeatOpportunityFound == false) {
-                            //if there is an opportunity that has the same Id as the one the user is trying to register
-                            if (firebaseAccountRegisteredList.get(i).equals(opportunityId)) {
-                                stopRepeatOpportunityFound = true;
+                        Log.e("firebase", "Error getting data", task.getException());
+                    }
+                    else {
+                        Log.d("firebase", "What is this: " + String.valueOf(task.getResult().getValue()));
+                        userAccount firebaseAccountInfo = (userAccount)(task.getResult().getValue(userAccount.class));
+                        List<String> firebaseAccountRegisteredList = firebaseAccountInfo.getRegisteredList();
+                        Boolean stopRepeatOpportunityFound = false;
+                        for(int i = 0; i< firebaseAccountRegisteredList.size(); i++){
+                            if(stopRepeatOpportunityFound == false) {
+                                //if there is an opportunity that has the same Id as the one the user is trying to register
+                                if (firebaseAccountRegisteredList.get(i).equals(opportunityId)) {
+                                    stopRepeatOpportunityFound = true;
+                                    break;
+                                }
+                            }
+                            else{
                                 break;
                             }
                         }
-                        else{
+                        // the user has not yet registered the opportunity.
+                        // Send email
+                        // Add the opportunity id to the user's already registered list
+                        if(stopRepeatOpportunityFound == false) {
+                            firebaseAccountRegisteredList.add(currentlyViewingOpportunity.getOpportunityId());
+                            // update the list to the firebase database
+                            mDatabase.child("users").child(userId).child("registeredList").setValue(firebaseAccountRegisteredList);
+                            Log.d(TAG, "Registration Successful");
+                            showToast("Registration Successful. Check your inbox for information");
+                        }
+                        if(stopRepeatOpportunityFound == true){
+                            showToast("Already registered.");
+                        }
+                    }
+                }
+            });
+
+
+            /**
+             ValueEventListener registeredListListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+            // Get userAccount object and use the values to update the UI
+            userAccount firebaseAccountInfo = dataSnapshot.child("users").child(userId).getValue(userAccount.class);
+
+            // get the account's registered opportunity list
+            List<String> firebaseAccountRegisteredList = firebaseAccountInfo.getRegisteredList();
+            Boolean stopRepeatOpportunityFound = false;
+            //iterate through what the user has registered
+
+            for(int i = 0; i< firebaseAccountRegisteredList.size(); i++){
+                if(stopRepeatOpportunityFound == false) {
+                        //if there is an opportunity that has the same Id as the one the user is trying to register
+                        if (firebaseAccountRegisteredList.get(i).equals(opportunityId)) {
+                            stopRepeatOpportunityFound = true;
                             break;
                         }
                     }
-                    // the user has not yet registered the opportunity.
-                    // Send email
-                    // Add the opportunity id to the user's already registered list
-                    if(stopRepeatOpportunityFound == false) {
-                        firebaseAccountRegisteredList.add(currentlyViewingOpportunity.getOpportunityId());
-                        // update the list to the firebase database
-                        mDatabase.child("users").child(userId).child("registeredList").setValue(firebaseAccountRegisteredList);
-                        Log.d(TAG, "Registration Successful");
-                        showToast("Registration Successful. Check your inbox for information");
+                    else{
+                        break;
                     }
-                    if(stopRepeatOpportunityFound == true){
-                        showToast("Already registered.");
-                    }
-                    mDatabase.removeEventListener(registeredListListener);
+                }
+                // the user has not yet registered the opportunity.
+                // Send email
+                // Add the opportunity id to the user's already registered list
+                if(stopRepeatOpportunityFound == false) {
+                    firebaseAccountRegisteredList.add(currentlyViewingOpportunity.getOpportunityId());
+                    // update the list to the firebase database
+                    mDatabase.child("users").child(userId).child("registeredList").setValue(firebaseAccountRegisteredList);
+                    Log.d(TAG, "Registration Successful");
+                    showToast("Registration Successful. Check your inbox for information");
+                }
+                if(stopRepeatOpportunityFound == true){
+                    showToast("Already registered.");
                 }
 
-                @Override
+            }
+
+            @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    // Getting Post failed, log a message
-                    Log.d(TAG, "loadPost:onCancelled", databaseError.toException());
+                // Getting Post failed, log a message
+                Log.d(TAG, "loadPost:onCancelled", databaseError.toException());
                 }
             };
 
 
-            mDatabase.addValueEventListener(registeredListListener);
-
-
+             mDatabase.addValueEventListener(registeredListListener);
+             **/
 
 
         } else {
