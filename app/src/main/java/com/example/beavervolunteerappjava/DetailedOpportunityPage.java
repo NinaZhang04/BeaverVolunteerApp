@@ -48,9 +48,19 @@ public class DetailedOpportunityPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DetailedOpportunityPage.this, VolunteerOpportunityPage.class));
+                //
+                // record the time that the opportunity was registered and send reminder email 7 days later
+                // save this information on
+                // Title: Registration details of: + volunteerOpportunityName
+                // Body: volunteerRegistrationDetails + two new lines + thank you for registering!
+                //
+
             }
         });
     }
-    // Remember to create
+
+    // Remember to create emailing
+
+
 
 }
