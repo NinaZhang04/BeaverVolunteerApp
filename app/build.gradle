@@ -31,6 +31,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+
 }
 
 dependencies {
@@ -105,6 +106,14 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-storage'
 
+    // implement the emailing package
+    // actually it turns out somehow it is already included so please do not add it anymore!
+    //implementation 'com.sun.mail:android-mail:1.6.0'
+    //implementation 'com.sun.mail:android-activation:1.6.0'
+    //implementation 'com.sun.mail:jakarta.mail:2.0.0'
+    //implementation 'com.sun.activation:jakarta.activation:2.0.0'
+
+
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
 
@@ -114,3 +123,4 @@ dependencies {
     // For dependencies on Login with firebase:
     // https://firebase.google.com/docs/auth/android/firebaseui
 }
+

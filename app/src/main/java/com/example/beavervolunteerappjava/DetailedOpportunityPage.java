@@ -24,6 +24,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
+//import jakarta.mail.MessagingException;
+/**
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+**/
+import java.util.Properties;
+
 import java.util.List;
 
 public class DetailedOpportunityPage extends AppCompatActivity {
@@ -35,8 +47,11 @@ public class DetailedOpportunityPage extends AppCompatActivity {
     Button goBackButtonDetailedPage;
     Button detailedResgistrationButton;
     private DatabaseReference mDatabase;
-    //did
 
+
+
+    String volunteerOpportunityName;
+    String volunteerRegistrationDetails;
 
 
 
@@ -44,13 +59,13 @@ public class DetailedOpportunityPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_opportunity_page);
-        String volunteerOpportunityName = currentlyViewingOpportunity.getOpportunityName();
+        volunteerOpportunityName = currentlyViewingOpportunity.getOpportunityName();
         String volunteerShortDescription = currentlyViewingOpportunity.getShortDescription();
         String volunteerLongDescription = currentlyViewingOpportunity.getLongDescription();
         String volunteerResponsibilities = currentlyViewingOpportunity.getVolunteerResponsibilities();
         String volunteerRequirements = currentlyViewingOpportunity.getVolunteerRequirement();
         String volunteerLocationAndHours = currentlyViewingOpportunity.getVolunteerLocationAndHours();
-        String volunteerRegistrationDetails = currentlyViewingOpportunity.getResgitrationDetails();
+        volunteerRegistrationDetails = currentlyViewingOpportunity.getResgitrationDetails();
         String volunteerExpireDate = currentlyViewingOpportunity.getVolunteerExpireTime();
         opportunityId = currentlyViewingOpportunity.getOpportunityId();
 
@@ -128,15 +143,30 @@ public class DetailedOpportunityPage extends AppCompatActivity {
                                 break;
                             }
                         }
+
                         // the user has not yet registered the opportunity.
-                        // Send email
-                        // Add the opportunity id to the user's already registered list
                         if(stopRepeatOpportunityFound == false) {
                             firebaseAccountRegisteredList.add(currentlyViewingOpportunity.getOpportunityId());
                             // update the list to the firebase database
+                            // Add the opportunity id to the user's already registered list
                             mDatabase.child("users").child(userId).child("registeredList").setValue(firebaseAccountRegisteredList);
                             Log.d(TAG, "Registration Successful");
                             showToast("Registration Successful. Check your inbox for information");
+                            // Send email
+                            // will be sent
+                            String senderEmail = ImportantValues.senderEmail;
+                            String password = ImportantValues.senderEmail;
+                            String messageToSend =
+                                    "Hello! Thank you for registering for" + volunteerOpportunityName +
+                                    ".\n\n" +
+                                    "The registration detail is as follows: \n" +
+                                    volunteerRegistrationDetails + ".\n" +
+                                    "Good luck applying!";
+                            Log.d(TAG, messageToSend);
+
+
+
+
                         }
                         if(stopRepeatOpportunityFound == true){
                             showToast("Already registered.");
@@ -206,5 +236,15 @@ public class DetailedOpportunityPage extends AppCompatActivity {
 
     private void showToast(String text){
         Toast.makeText(DetailedOpportunityPage.this, text, Toast.LENGTH_LONG).show();
+    }
+
+    public void sendEmail(String sender, String password, String message){
+        // https://www.youtube.com/watch?v=roruU4hVwXA
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        //Session session = Session.getInstance(props, new javax.mail.Authenticator())
     }
 }
