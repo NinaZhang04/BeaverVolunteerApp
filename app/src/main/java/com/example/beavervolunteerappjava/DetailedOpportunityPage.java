@@ -263,6 +263,7 @@ public class DetailedOpportunityPage extends AppCompatActivity {
         }catch(MessagingException e){
             Log.d(TAG, ":(((((((((((((((((( email was not sent");
             throw new RuntimeException(e);
+
         }
     }
 }
