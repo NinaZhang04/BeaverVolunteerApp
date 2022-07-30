@@ -25,15 +25,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-//import jakarta.mail.MessagingException;
-/**
+import javax.mail.Message;
+import javax.mail.MessagingException;
+
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-**/
+
 import java.util.Properties;
 
 import java.util.List;
@@ -118,7 +119,7 @@ public class DetailedOpportunityPage extends AppCompatActivity {
             // Get the current user's ID
             String userId = user.getUid();
             // Use the above ID to check in the realtime database about their registered list
-
+            String receiverEmail = user.getEmail();
             mDatabase.child("users").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -155,7 +156,7 @@ public class DetailedOpportunityPage extends AppCompatActivity {
                             // Send email
                             // will be sent
                             String senderEmail = ImportantValues.senderEmail;
-                            String password = ImportantValues.senderEmail;
+                            String password = ImportantValues.senderPassword;
                             String messageToSend =
                                     "Hello! Thank you for registering for" + volunteerOpportunityName +
                                     ".\n\n" +
@@ -164,7 +165,7 @@ public class DetailedOpportunityPage extends AppCompatActivity {
                                     "Good luck applying!";
                             Log.d(TAG, messageToSend);
 
-
+                            sendEmail(senderEmail, password, messageToSend, receiverEmail);
 
 
                         }
@@ -238,13 +239,30 @@ public class DetailedOpportunityPage extends AppCompatActivity {
         Toast.makeText(DetailedOpportunityPage.this, text, Toast.LENGTH_LONG).show();
     }
 
-    public void sendEmail(String sender, String password, String message){
+    public void sendEmail(String senderEmail, String password, String mailBodyText, String receiverEmail){
         // https://www.youtube.com/watch?v=roruU4hVwXA
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
-        //Session session = Session.getInstance(props, new javax.mail.Authenticator())
+        Session session = Session.getInstance(props, new javax.mail.Authenticator(){
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(senderEmail, password);
+            }
+        });
+        try{
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(senderEmail));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverEmail.toString()));
+            message.setSubject(ImportantValues.registrationFirstTimeSubject);
+            message.setText(mailBodyText);
+            Transport.send(message);
+            Log.d(TAG, "Email should be sent! :::::::::::::::::::::::::::");
+        }catch(MessagingException e){
+            Log.d(TAG, ":(((((((((((((((((( email was not sent");
+            throw new RuntimeException(e);
+        }
     }
 }
