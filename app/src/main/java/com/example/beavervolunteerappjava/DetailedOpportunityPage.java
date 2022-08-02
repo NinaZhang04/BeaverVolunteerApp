@@ -248,32 +248,36 @@ public class DetailedOpportunityPage extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_TEXT, mailBodyText);
         startActivity(intent);
          **/
+        Log.d(TAG, "Email in mainthread ");
+       new Thread(()-> {
+           // https://www.youtube.com/watch?v=roruU4hVwXA
+           Log.d(TAG, "Email in this trhead ");
+           Properties props = new Properties();
+           props.put("mail.smtp.auth", "true");
+           props.put("mail.smtp.starttls.enable", "true");
+           props.put("mail.smtp.host", "smtp.gmail.com");
+           props.put("mail.smtp.port", "587");
+           Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+               @Override
+               protected PasswordAuthentication getPasswordAuthentication() {
+                   return new PasswordAuthentication(senderEmail, password);
+               }
+           });
+           try {
 
-        // https://www.youtube.com/watch?v=roruU4hVwXA
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-        Session session = Session.getInstance(props, new javax.mail.Authenticator(){
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(senderEmail, password);
-            }
-        });
-        try{
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(senderEmail));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverEmail));
-            message.setSubject(ImportantValues.registrationFirstTimeSubject);
-            message.setText(mailBodyText);
-            Transport.send(message);
-            Log.d(TAG, "Email should be sent! :::::::::::::::::::::::::::");
-        }catch(MessagingException e){
-            Log.d(TAG, ":(((((((((((((((((( email was not sent");
-            throw new RuntimeException(e);
+               Message message = new MimeMessage(session);
+               message.setFrom(new InternetAddress(senderEmail));
+               message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverEmail));
+               message.setSubject(ImportantValues.registrationFirstTimeSubject);
+               message.setText(mailBodyText);
+               Transport.send(message);
+               Log.d(TAG, "Email should be sent! :::::::::::::::::::::::::::");
+           } catch (MessagingException e) {
+               Log.d(TAG, ":(((((((((((((((((( email was not sent");
+               throw new RuntimeException(e);
 
-        }
+           }
+       }).start();
 
     }
 }
