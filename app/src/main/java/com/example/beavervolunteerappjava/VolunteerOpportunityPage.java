@@ -114,8 +114,7 @@ public class VolunteerOpportunityPage extends AppCompatActivity implements Selec
         //new// Log.e(TAG,"WHAT IS HAPPENING?????????????????????????????????????");
         downloadVolunteerData();
         classListOfOpportunityList = createOpportunityList();
-        Log.d(TAG, "OpportunityReport:   " + classListOfOpportunityList[0].getOpportunityName());
-        Log.d(TAG, "OpportunityReport:   " + classListOfOpportunityList[0].getOpportunityId());
+
         if(classListOfOpportunityList != null){
             displayItems();
         }

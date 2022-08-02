@@ -7,7 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -240,6 +242,13 @@ public class DetailedOpportunityPage extends AppCompatActivity {
     }
 
     public void sendEmail(String senderEmail, String password, String mailBodyText, String receiverEmail){
+        /**
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto: " + receiverEmail));
+        intent.putExtra(Intent.EXTRA_SUBJECT, ImportantValues.registrationFirstTimeSubject);
+        intent.putExtra(Intent.EXTRA_TEXT, mailBodyText);
+        startActivity(intent);
+         **/
+
         // https://www.youtube.com/watch?v=roruU4hVwXA
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -255,7 +264,7 @@ public class DetailedOpportunityPage extends AppCompatActivity {
         try{
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(senderEmail));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverEmail.toString()));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverEmail));
             message.setSubject(ImportantValues.registrationFirstTimeSubject);
             message.setText(mailBodyText);
             Transport.send(message);
@@ -265,5 +274,6 @@ public class DetailedOpportunityPage extends AppCompatActivity {
             throw new RuntimeException(e);
 
         }
+
     }
 }
