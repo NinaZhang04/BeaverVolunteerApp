@@ -37,6 +37,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import java.security.Policy;
 import java.util.Properties;
 
 import java.util.List;
@@ -122,6 +123,7 @@ public class DetailedOpportunityPage extends AppCompatActivity {
             String userId = user.getUid();
             // Use the above ID to check in the realtime database about their registered list
             String receiverEmail = user.getEmail();
+            Log.i(TAG, receiverEmail);
             mDatabase.child("users").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -249,35 +251,36 @@ public class DetailedOpportunityPage extends AppCompatActivity {
         startActivity(intent);
          **/
         Log.d(TAG, "Email in mainthread ");
-       new Thread(()-> {
-           // https://www.youtube.com/watch?v=roruU4hVwXA
-           Log.d(TAG, "Email in this trhead ");
-           Properties props = new Properties();
-           props.put("mail.smtp.auth", "true");
-           props.put("mail.smtp.starttls.enable", "true");
-           props.put("mail.smtp.host", "smtp.gmail.com");
-           props.put("mail.smtp.port", "587");
-           Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-               @Override
-               protected PasswordAuthentication getPasswordAuthentication() {
-                   return new PasswordAuthentication(senderEmail, password);
-               }
-           });
-           try {
+        new Thread(()-> {
+            // https://www.youtube.com/watch?v=roruU4hVwXA
+            Log.d(TAG, "Email in this thread ");
+            Properties props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.port", "587");
+            Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(senderEmail, password);
+                }
+            });
+            try {
 
-               Message message = new MimeMessage(session);
-               message.setFrom(new InternetAddress(senderEmail));
-               message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverEmail));
-               message.setSubject(ImportantValues.registrationFirstTimeSubject);
-               message.setText(mailBodyText);
-               Transport.send(message);
-               Log.d(TAG, "Email should be sent! :::::::::::::::::::::::::::");
-           } catch (MessagingException e) {
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(senderEmail));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverEmail));
+                message.setSubject(ImportantValues.registrationFirstTimeSubject);
+                message.setText(mailBodyText);
+                Transport.send(message);
+                Log.d(TAG, "Email should be sent! :::::::::::::::::::::::::::");
+            } catch (MessagingException e) {
                Log.d(TAG, ":(((((((((((((((((( email was not sent");
                throw new RuntimeException(e);
-
-           }
-       }).start();
-
+            }
+        }).start();
+        // (if want to remove the new thread argument, use the following line below
+        //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        //StrictMode.setThreadPolicy(policy);
     }
 }
