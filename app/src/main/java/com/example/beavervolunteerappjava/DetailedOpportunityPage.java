@@ -6,6 +6,10 @@ import static com.example.beavervolunteerappjava.VolunteerOpportunityPage.curren
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +20,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.beavervolunteerappjava.databinding.ActivityDetailedOpportunityPageBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,7 +56,7 @@ public class DetailedOpportunityPage extends AppCompatActivity {
     Button goBackButtonDetailedPage;
     Button detailedResgistrationButton;
     private DatabaseReference mDatabase;
-
+    private ActivityDetailedOpportunityPageBinding binding;
 
 
     String volunteerOpportunityName;
@@ -86,6 +91,10 @@ public class DetailedOpportunityPage extends AppCompatActivity {
         responsibilities.setText(volunteerResponsibilities);
         requirements.setText(volunteerRequirements);
         locationAndHours.setText(volunteerLocationAndHours);
+
+
+        createNotificationChannel();
+
 
         goBackButtonDetailedPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,7 +179,19 @@ public class DetailedOpportunityPage extends AppCompatActivity {
                             Log.d(TAG, messageToSend);
 
                             sendEmail(senderEmail, password, messageToSend, receiverEmail);
+                            // set up an intent for the broadcast receiver, aka. alarm
+                            Intent reminderIntent = new Intent(DetailedOpportunityPage.this, AlarmReceiver.class);
+                            PendingIntent pendingIntent = PendingIntent.getBroadcast(DetailedOpportunityPage.this, 0, reminderIntent,0);
+                            //setReminder();
 
+                            AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+                            long timeAtRegisterRequest = System.currentTimeMillis();
+                            long waitTimeInMillis = 1000 * 6;
+                            //* 3600 * 24 * 7
+                            //RTC_WAKEUP wakes up the device to fire the pending intent at the specified time.
+                            alarmManager.set(AlarmManager.RTC_WAKEUP,
+                                    timeAtRegisterRequest + waitTimeInMillis,
+                                    pendingIntent);
 
                         }
                         if(stopRepeatOpportunityFound == true){
@@ -239,8 +260,27 @@ public class DetailedOpportunityPage extends AppCompatActivity {
 
     }
 
+    public void setReminder() {
+        binding = ActivityDetailedOpportunityPageBinding.inflate(getLayoutInflater());
+
+    }
+
     private void showToast(String text){
         Toast.makeText(DetailedOpportunityPage.this, text, Toast.LENGTH_LONG).show();
+    }
+
+    private void createNotificationChannel(){
+        CharSequence name = "Beaver With U";
+        String description = "Channel for volunteer opportunity feedback reminder";
+
+        int importance = NotificationManager.IMPORTANCE_HIGH;
+        NotificationChannel channel = new NotificationChannel("BeaverWithU", name, importance);
+        channel.setDescription((description));
+
+
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
+
     }
 
     public void sendEmail(String senderEmail, String password, String mailBodyText, String receiverEmail){
@@ -283,4 +323,9 @@ public class DetailedOpportunityPage extends AppCompatActivity {
         //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         //StrictMode.setThreadPolicy(policy);
     }
+
+
+
+
+
 }
