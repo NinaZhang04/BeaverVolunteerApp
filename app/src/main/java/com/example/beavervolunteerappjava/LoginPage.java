@@ -38,6 +38,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
 public class LoginPage extends AppCompatActivity{
     static private final String TAG= "BeaverMainActivity";
     //GoogleSignInClient mGoogleSignInClient;
@@ -101,9 +104,15 @@ public class LoginPage extends AppCompatActivity{
         signInButton.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
+
                  String tempEmailAddress = loginEmailAddress.getText().toString();
                  String tempPassword = loginPassword.getText().toString();
-                 signInWithEmailAndPassword(tempEmailAddress,tempPassword);
+                 if(validateEmail(tempEmailAddress)){
+                     signInWithEmailAndPassword(tempEmailAddress,tempPassword);
+                 }
+                 else{
+                     showToast("Email invalid");
+                 }
              }
          });
 
@@ -281,7 +290,7 @@ public class LoginPage extends AppCompatActivity{
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginPage.this, "Authentication failed.",
+                            Toast.makeText(LoginPage.this, "Email or password incorrect. Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -293,11 +302,24 @@ public class LoginPage extends AppCompatActivity{
         if (account != null) {
             startActivity(new Intent(LoginPage.this, userLandingPage.class));
         } else {
-            showToast("Login failed. Email or password incorrect.");
         }
     }
 
     private void showToast(String text){
         Toast.makeText(LoginPage.this, text, Toast.LENGTH_LONG).show();
+    }
+
+    private boolean validateEmail(String email) {
+        boolean isValid = false;
+        try {
+            // Create InternetAddress object and validated the supplied
+            // address which is this case is an email address.
+            InternetAddress internetAddress = new InternetAddress(email);
+            internetAddress.validate();
+            isValid = true;
+        } catch (AddressException e) {
+            e.printStackTrace();
+        }
+        return isValid;
     }
 }
