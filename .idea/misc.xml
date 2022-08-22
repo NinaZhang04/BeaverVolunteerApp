@@ -25,8 +25,16 @@
         <entry key="..\:/Users/healt/Downloads/BeaverVolunteerApp-master/app/src/main/res/layout/activity_opportunity_list.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/healt/Downloads/BeaverVolunteerApp-master/app/src/main/res/layout/activity_user_landingpage.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/healt/Downloads/BeaverVolunteerApp-master/app/src/main/res/layout/activity_volunteer_opportunity_page.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/healt/StudioProjects/BeaverVolunteerApp/app/src/main/res/drawable/login_page_top_shape.xml" value="0.177" />
+        <entry key="..\:/Users/healt/StudioProjects/BeaverVolunteerApp/app/src/main/res/drawable/sign_up_form_top.xml" value="0.176" />
         <entry key="..\:/Users/healt/StudioProjects/BeaverVolunteerApp/app/src/main/res/layout/activity_about_the_app_page.xml" value="0.25" />
-        <entry key="..\:/Users/healt/StudioProjects/BeaverVolunteerApp/app/src/main/res/layout/activity_login_page.xml" value="0.25" />
+        <entry key="..\:/Users/healt/StudioProjects/BeaverVolunteerApp/app/src/main/res/layout/activity_info_edit_page.xml" value="0.2" />
+        <entry key="..\:/Users/healt/StudioProjects/BeaverVolunteerApp/app/src/main/res/layout/activity_login_page.xml" value="0.2" />
+        <entry key="..\:/Users/healt/StudioProjects/BeaverVolunteerApp/app/src/main/res/layout/activity_opportunity_list.xml" value="0.190625" />
+        <entry key="..\:/Users/healt/StudioProjects/BeaverVolunteerApp/app/src/main/res/layout/activity_user_landingpage.xml" value="0.190625" />
+        <entry key="..\:/Users/healt/StudioProjects/BeaverVolunteerApp/app/src/main/res/layout/activity_volunteer_opportunity_page.xml" value="0.190625" />
+        <entry key="..\:/Users/healt/StudioProjects/BeaverVolunteerApp/app/src/main/res/layout/opportunity_pop_up.xml" value="0.190625" />
+        <entry key="..\:/Users/healt/StudioProjects/BeaverVolunteerApp/app/src/main/res/layout/single_opportunity.xml" value="0.190625" />
       </map>
     </option>
   </component>
@@ -35,5 +43,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.264" />
+      </ProjectState>
+    </option>
   </component>
 </project>
