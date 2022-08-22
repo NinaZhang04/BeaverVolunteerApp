@@ -8,84 +8,128 @@
 
     <Button
         android:id="@+id/signOutButton"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="sans-serif"
         android:text="Sign Out"
+        android:textColor="@color/dark_water_blue"
         android:textSize="20sp"
+        app:cornerRadius="20dip"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/registerButton"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/registerButton"
-        app:layout_constraintTop_toBottomOf="@+id/registerButton" />
+        app:strokeColor="@color/dark_water_blue"
+        app:strokeWidth="2dp" />
 
     <EditText
         android:id="@+id/loginPassword"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Enter Password:"
         android:inputType="textPassword"
         android:minHeight="48dp"
+        android:textColor="@color/dark_water_blue"
+        android:textColorHint="@color/dark_water_blue"
         app:layout_constraintEnd_toEndOf="@+id/loginEmailAddress"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/loginEmailAddress"
         app:layout_constraintTop_toBottomOf="@+id/loginEmailAddress" />
+
+
+    <!--- Google sign in button-->
 
     <TextView
         android:id="@+id/appName4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="122dp"
-        android:layout_marginTop="100dp"
         android:layout_marginEnd="123dp"
-        android:text="Beaver App"
-        android:textColor="@color/storm_cloud"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif"
+        android:shadowColor="@color/black"
+        android:shadowRadius="20"
+        android:text="Beaver Volunteer App"
+        android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:translationZ="90dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-
-    <!--- Google sign in button-->
     <EditText
         android:id="@+id/loginEmailAddress"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="60dp"
         android:ems="10"
         android:hint="Enter Email:"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
+        android:textColor="@color/dark_water_blue"
+        android:textColorHint="@color/dark_water_blue"
         app:layout_constraintEnd_toEndOf="@+id/appName4"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="@+id/appName4"
         app:layout_constraintTop_toBottomOf="@+id/appName4" />
 
     <Button
         android:id="@+id/signInButton"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/dark_water_blue"
+        android:fontFamily="sans-serif"
         android:text="Sign In"
         android:textColor="@color/white"
         android:textSize="20sp"
+        app:cornerRadius="20dip"
+
+        app:layout_constraintBottom_toTopOf="@+id/registerButton"
         app:layout_constraintEnd_toEndOf="@+id/loginPassword"
         app:layout_constraintHorizontal_bias="0.472"
-        app:layout_constraintStart_toStartOf="@+id/loginPassword"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+        app:layout_constraintStart_toStartOf="@+id/loginPassword" />
 
     <Button
         android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="sans-serif"
         android:text="Register"
-        android:textColor="@color/white"
+        android:textColor="@color/dark_water_blue"
         android:textSize="20sp"
+        app:cornerRadius="20dip"
+        app:layout_constraintBottom_toTopOf="@+id/signOutButton"
         app:layout_constraintEnd_toEndOf="@+id/loginPassword"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/loginPassword"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+        app:strokeColor="@color/dark_water_blue"
+        app:strokeWidth="2dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:background="@drawable/login_page_top_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="-30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/beaver_logo_small" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

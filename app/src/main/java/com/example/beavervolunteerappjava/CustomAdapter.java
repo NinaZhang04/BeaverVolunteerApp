@@ -1,5 +1,10 @@
 package com.example.beavervolunteerappjava;
-
+/**
+ *
+ * @author  Nina Zhang
+ * @version 1.0
+ * @since   2022/07/
+ */
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

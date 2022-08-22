@@ -13,4 +13,8 @@
     <color name="storm_cloud">#4F6367</color>
     <color name="beige">#EEF5DB</color>
     <color name="sunset_change">#FE5F55</color>
+
+    <color name="dark_water_blue">#2193b0</color>
+    <color name="light_sky_blue">#6dd5ed</color>
+
 </resources>

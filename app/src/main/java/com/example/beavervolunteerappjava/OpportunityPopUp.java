@@ -1,5 +1,10 @@
 package com.example.beavervolunteerappjava;
-
+/**
+ *
+ * @author  Nina Zhang
+ * @version 1.0
+ * @since   2022/07/
+ */
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;

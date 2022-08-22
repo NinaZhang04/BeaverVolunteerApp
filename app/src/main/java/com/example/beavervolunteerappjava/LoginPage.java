@@ -1,5 +1,10 @@
 package com.example.beavervolunteerappjava;
-
+/**
+ *
+ * @author  Nina Zhang
+ * @version 1.0
+ * @since   2022/07/
+ */
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
