@@ -17,6 +17,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textEmailAddress"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputLastName"
             app:layout_constraintHorizontal_bias="0.518"
             app:layout_constraintStart_toStartOf="@+id/tvAskEmail"
@@ -150,6 +151,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPassword"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputEmailAddress"
             app:layout_constraintStart_toStartOf="@+id/inputEmailAddress"
             app:layout_constraintTop_toBottomOf="@+id/tvAskPassword" />
@@ -163,6 +165,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -177,6 +180,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/tvAskLastName" />
@@ -203,6 +207,7 @@
             android:inputType="textPersonName"
             android:textSize="16sp"
             android:textAlignment="center"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputLastName"
             app:layout_constraintStart_toStartOf="@+id/inputFirstName"
             app:layout_constraintTop_toBottomOf="@+id/askUserGrade" />
@@ -215,6 +220,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputPassword"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/inputGrade"
@@ -227,6 +233,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputFirstName"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/inputFirstName"
@@ -239,6 +246,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputLastName"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/inputLastName"
@@ -252,6 +260,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:drawable = "@drawable/activity_info_edit_page_rounded_edittext"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputLastName"
             app:layout_constraintStart_toStartOf="@+id/inputFirstName"
             app:layout_constraintTop_toBottomOf="@+id/askCity" />
@@ -263,6 +272,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/signUpText"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/tvAskFirstName"
@@ -324,8 +334,8 @@
             android:layout_height="80dp"
             android:background="@drawable/ic_activity_info_edit_page_wave"
             android:text=""
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="-3dp" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
