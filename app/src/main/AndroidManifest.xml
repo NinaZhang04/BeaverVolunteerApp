@@ -34,6 +34,9 @@
             android:name=".userLandingPage"
             android:exported="false" />
         <activity
+            android:name=".InfoEditAfterRegistrationPage"
+            android:exported="false" />
+        <activity
             android:name=".InfoEditPage"
             android:exported="false" />
         <activity

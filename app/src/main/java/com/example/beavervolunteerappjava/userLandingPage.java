@@ -113,7 +113,7 @@ public class userLandingPage extends AppCompatActivity {
         reeditInfoPageButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(userLandingPage.this, InfoEditAfterRegistrationPage.class));
             }
         });
 

@@ -5,14 +5,9 @@ package com.example.beavervolunteerappjava;
  * @version 1.0
  * @since   2022/07/
  */
+
 import static android.content.ContentValues.TAG;
-
 import static com.google.android.gms.common.util.ArrayUtils.newArrayList;
-
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +18,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
@@ -31,21 +31,18 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.apache.commons.compress.utils.Lists;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 
-public class InfoEditPage extends AppCompatActivity {
+public class InfoEditAfterRegistrationPage extends AppCompatActivity {
 
     //Declare variables of the various inputs
-    EditText inputEmailAddress;
-    EditText inputPassword;
     EditText inputFirstName;
     EditText inputLastName;
     Spinner  inputSchoolStatus;
@@ -68,6 +65,7 @@ public class InfoEditPage extends AppCompatActivity {
     String emptyInputError = "You have unfilled information";
     String otherError = "";
 
+
     //list of strings input
     int numberOfInputs = 11;
     String[] stringInputs = new String[numberOfInputs];
@@ -76,17 +74,15 @@ public class InfoEditPage extends AppCompatActivity {
     //Declare database variable for Firebase Google
     private DatabaseReference mDatabase;
 
-    //Declare an instance of FrebaseAuth
+    //Declare an instance of FirebaseAuth
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_edit_page);
+        setContentView(R.layout.activity_info_edit_page_after_registration);
 
         //initialize variables of the various inputs
-        inputEmailAddress = (EditText) findViewById(R.id.inputEmailAddress);
-        inputPassword = (EditText) findViewById(R.id.inputPassword);
         inputFirstName = (EditText) findViewById(R.id.inputFirstName);
         inputLastName = (EditText) findViewById(R.id.inputLastName);
         inputSchoolStatus = (Spinner) findViewById(R.id.inputSchoolStatus);
@@ -107,9 +103,10 @@ public class InfoEditPage extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        //Clear out whoever is logged in currently
+        /*
+        //Clear out whoever is logged in currently(this was copied from InfoEdit, not necesary for info edit after registration
         AuthUI.getInstance()
-                .signOut(InfoEditPage.this)
+                .signOut(InfoEditAfterRegistrationPage.this)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     public void onComplete(@NonNull Task<Void> task) {
                         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -120,15 +117,19 @@ public class InfoEditPage extends AppCompatActivity {
                             //reload(); reload the page since no one signed in
                         }
                     }
-                });
-
+        });
+        */
 
         infoSubmit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                String emailAddress = inputEmailAddress.getText().toString();
-                String password = inputPassword.getText().toString();
+                // No need for getting email when editing information, but leave this line in in case in the future might need it
+                String emailAddress = user.getEmail();
+
+
                 String firstName = inputFirstName.getText().toString();
                 String lastName = inputLastName.getText().toString();
                 String schoolStatus = inputSchoolStatus.getItemAtPosition(inputSchoolStatus.getSelectedItemPosition()).toString();
@@ -140,7 +141,7 @@ public class InfoEditPage extends AppCompatActivity {
                 String address = inputAddress.getText().toString();
 
                 stringInputs[0] = emailAddress;
-                stringInputs[1] = password;
+                stringInputs[1] = "dummy password filler to prevent NullPointerException when reading the stringinputs";
                 stringInputs[2] = firstName;
                 stringInputs[3] = lastName;
                 stringInputs[4] = schoolStatus;
@@ -166,15 +167,9 @@ public class InfoEditPage extends AppCompatActivity {
                     }
                 };
 
-                //password check is not passed
-                //Password has to be at least 6 characters with both letters and numbers
-                if(checkPasswordValid(password) == false){
-                    accountInfoOk = false;
-                    showToastInfoEdit("Password Invalid");
-                }
-
                 if(accountInfoOk) {
-                    createUserAccountWithEmail(stringInputs[0], stringInputs[1]);
+                    updateDataBase(user);
+                    //createUserAccountWithEmail(stringInputs[0], stringInputs[1]);
                 }
                 else{
 
@@ -190,14 +185,15 @@ public class InfoEditPage extends AppCompatActivity {
         infoCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(InfoEditPage.this, LoginPage.class));
+                startActivity(new Intent(InfoEditAfterRegistrationPage.this, userLandingPage.class));
             }
         });
     }
-
+/*
     public userAccount infoEdit(String pageComingFrom){
         return new userAccount();
     }
+*/
 
 
     // See: https://developer.android.com/training/basics/intents/result
@@ -249,100 +245,34 @@ public class InfoEditPage extends AppCompatActivity {
      * used to show an error mostly
      */
     private void showToastInfoEdit(String text){
-        Toast.makeText(InfoEditPage.this, text, Toast.LENGTH_LONG).show();
+        Toast.makeText(InfoEditAfterRegistrationPage.this, text, Toast.LENGTH_LONG).show();
     }
 
-
-    public String randomIdGenerator(){
-        String randomID = "";
-        String randomLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        for(int i = 0; i< 8; i++){
-            Random rand = new Random();
-            int randomLetterNum = rand.nextInt(36);
-            randomID += randomLetters.charAt(randomLetterNum);
-        }
-        return randomID;
-    }
-
-
-    public void createUserAccountWithEmail(String email, String password){
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "==================================createUserWithEmail:success");
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            updateDataBase(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.d(TAG, "==================================createUserWithEmail:failure", task.getException());
-                            showToastInfoEdit("Account has already signed up or user cannot be created");
-                            updateDataBase(null);
-                        }
-                    }
-                });
-    }
 
     private void updateDataBase(FirebaseUser user){
         if(user != null){
-            Log.d(TAG,"LOGGGGIGNNNNNNNN :)))))))))))))))))))))))))))))))))))))))");
-            //get the Uid of newly created user
+            Log.d(TAG,"UPDATING RIGHT NOW!!!!!!!!!!!!!!!!!!!!!!");
+            //get the Uid of current user
             String uid = user.getUid();
             //get reference from database
             mDatabase = FirebaseDatabase.getInstance().getReference();
-            //create newUser object for upload
-            List<String> registeredListEmpty = newArrayList();
-            registeredListEmpty.add("A000000");
-            userAccount newUser = new userAccount(
-                    stringInputs[0], stringInputs[1],
-                    stringInputs[2], stringInputs[3],
-                    stringInputs[4], stringInputs[5],
-                    stringInputs[6], stringInputs[7],
-                    stringInputs[8], stringInputs[9],
-                    stringInputs[10],uid, registeredListEmpty
-                    );
-            //Load the information of the new user to the database
-            mDatabase.child("users").child(uid).setValue(newUser);
 
-            showToastInfoEdit("Account created successfully.");
-            startActivity(new Intent(InfoEditPage.this, LoginPage.class));
+            //update each item
+            mDatabase.child("users").child(uid).child("userFirstName").setValue(stringInputs[2]);
+            mDatabase.child("users").child(uid).child("userLastName").setValue(stringInputs[3]);
+            mDatabase.child("users").child(uid).child("userSchoolStatus").setValue(stringInputs[4]);
+            mDatabase.child("users").child(uid).child("userGrade").setValue(stringInputs[5]);
+            mDatabase.child("users").child(uid).child("schoolAttended").setValue(stringInputs[6]);
+            mDatabase.child("users").child(uid).child("countryOfLiving").setValue(stringInputs[7]);
+            mDatabase.child("users").child(uid).child("provinceOrStateOfLiving").setValue(stringInputs[8]);
+            mDatabase.child("users").child(uid).child("cityOfLiving").setValue(stringInputs[9]);
+            mDatabase.child("users").child(uid).child("addressLine").setValue(stringInputs[10]);
+
+            showToastInfoEdit("Information saved successfully.");
+            startActivity(new Intent(InfoEditAfterRegistrationPage.this, userLandingPage.class));
         }
         else{
-            Log.d(TAG, "login failed. >:( >:( >:( >:( >:( >:O >:((((((((((");
-        }
-    }
-
-
-
-    public boolean checkPasswordValid(String password){
-
-        //if password length is smaller than 6, it is a invalid password
-        if (password.length() < 6){
-            return false;
-        }
-
-
-        Boolean hasLetter = false;
-        Boolean hasDigit = false;
-
-        //check if password has both digits and letters
-        for(int i = 0; i < password.length(); i++){
-            if(Character.isDigit(password.charAt(i))){
-                hasDigit = true;
-            }
-            if(Character.isLetter(password.charAt(i))){
-                hasLetter = true;
-            }
-        }
-
-
-        if(hasLetter && hasDigit){
-            return true;
-        }
-        else{
-            return false;
+            Log.d(TAG, "FAILUARE NOOOOO. >:( >:( >:( >:( >:( >:O >:((((((((((");
         }
     }
 
