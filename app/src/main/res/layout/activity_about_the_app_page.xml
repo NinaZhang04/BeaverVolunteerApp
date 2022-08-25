@@ -23,7 +23,6 @@
         android:layout_marginTop="30dp"
         android:text="@string/aboutTheApp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,8 +31,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="list of frontend coders: Nina Zhang"
+        android:text="list of frontend coders: \nNina Zhang\nAdrien Chen\nPei Zheng"
         app:layout_constraintEnd_toEndOf="@+id/backendCoders"
         app:layout_constraintStart_toStartOf="@+id/backendCoders"
         app:layout_constraintTop_toBottomOf="@+id/backendCoders" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="All volunteer opportunities are provided and \nupdated by BeaverWithU"
+        app:layout_constraintEnd_toEndOf="@+id/fontendCoders"
+        app:layout_constraintStart_toStartOf="@+id/fontendCoders"
+        app:layout_constraintTop_toBottomOf="@+id/fontendCoders" />
 </androidx.constraintlayout.widget.ConstraintLayout>

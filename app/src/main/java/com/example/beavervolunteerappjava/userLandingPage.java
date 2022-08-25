@@ -120,7 +120,7 @@ public class userLandingPage extends AppCompatActivity {
         aboutTheAppButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(userLandingPage.this, AboutTheAppPage.class));
             }
         });
 
