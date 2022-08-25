@@ -36,11 +36,12 @@
             android:id="@+id/tvAskSchoolStatus"
             android:layout_width="137dp"
             android:layout_height="26dp"
+            android:layout_marginTop="50dp"
             android:text="School Status: "
             android:textColor="@color/dark_water_blue"
             android:textSize="18sp"
-            tools:layout_editor_absoluteX="28dp"
-            tools:layout_editor_absoluteY="274dp" />
+            app:layout_constraintStart_toStartOf="@+id/tvAskFirstName"
+            app:layout_constraintTop_toBottomOf="@+id/tvAskFirstName" />
 
         <TextView
             android:id="@+id/askUserGrade"
@@ -116,6 +117,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -130,6 +132,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/tvAskLastName" />
@@ -141,6 +144,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:entries="@array/schoolStatus"
             android:spinnerMode="dropdown"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputLastName"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/inputFirstName"
@@ -155,7 +159,7 @@
             android:hint='If not in school enter "not in school"'
             android:inputType="textPersonName"
             android:textSize="16sp"
-            android:textAlignment="center"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputLastName"
             app:layout_constraintStart_toStartOf="@+id/inputFirstName"
             app:layout_constraintTop_toBottomOf="@+id/askUserGrade" />
@@ -168,6 +172,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             app:layout_constraintStart_toStartOf="@+id/inputGrade"
             app:layout_constraintTop_toBottomOf="@+id/askSchoolAttended" />
 
@@ -178,6 +183,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputFirstName"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/inputFirstName"
@@ -190,6 +196,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputLastName"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/inputLastName"
@@ -202,6 +209,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             android:drawable = "@drawable/activity_info_edit_page_rounded_edittext"
             app:layout_constraintEnd_toEndOf="@+id/inputLastName"
             app:layout_constraintStart_toStartOf="@+id/inputFirstName"
@@ -214,6 +222,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/signUpText"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/tvAskFirstName"
@@ -275,8 +284,8 @@
             android:layout_height="80dp"
             android:background="@drawable/ic_activity_info_edit_page_wave"
             android:text=""
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="-3dp" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

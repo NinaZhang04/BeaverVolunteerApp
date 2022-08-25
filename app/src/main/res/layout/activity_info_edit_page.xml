@@ -192,6 +192,7 @@
             android:background="@drawable/activity_info_edit_page_rounded_edittext"
             android:entries="@array/schoolStatus"
             android:spinnerMode="dropdown"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputLastName"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/inputFirstName"
@@ -206,7 +207,6 @@
             android:hint='If not in school enter "not in school"'
             android:inputType="textPersonName"
             android:textSize="16sp"
-            android:textAlignment="center"
             android:paddingLeft="15dp"
             app:layout_constraintEnd_toEndOf="@+id/inputLastName"
             app:layout_constraintStart_toStartOf="@+id/inputFirstName"
