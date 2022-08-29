@@ -14,9 +14,15 @@
     <color name="beige">#EEF5DB</color>
     <color name="sunset_change">#FE5F55</color>
 
-    <color name="dark_water_blue">#2193b0</color>
-    <color name="light_sky_blue">#6dd5ed</color>
 
-    <color name="edittext_lightblue">#CAE9F5</color>
+    <color name="lightest_shade_blue">#CAE9F5</color>
+    <color name="light_sky_blue">#6dd5ed</color>
+    <color name="dark_water_blue">#2193b0</color>
+
+    <color name="single_opportunity_text_color">#2193b0</color>
+
+
+
+
 
 </resources>

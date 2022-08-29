@@ -5,6 +5,8 @@ package com.example.beavervolunteerappjava;
  * @version 1.0
  * @since   2022/07/
  */
+import static com.example.beavervolunteerappjava.InfoEditPage.checkPasswordValid;
+
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
@@ -107,11 +109,11 @@ public class LoginPage extends AppCompatActivity{
 
                  String tempEmailAddress = loginEmailAddress.getText().toString();
                  String tempPassword = loginPassword.getText().toString();
-                 if(validateEmail(tempEmailAddress)){
+                 if(validateEmail(tempEmailAddress) && checkPasswordValid(tempPassword)){
                      signInWithEmailAndPassword(tempEmailAddress,tempPassword);
                  }
                  else{
-                     showToast("Email invalid");
+                     showToast("Email or password invalid. Login failed.");
                  }
              }
          });
@@ -290,7 +292,7 @@ public class LoginPage extends AppCompatActivity{
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginPage.this, "Email or password incorrect. Authentication failed.",
+                            Toast.makeText(LoginPage.this, "Email or password incorrect. Login failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }

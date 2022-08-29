@@ -22,8 +22,12 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Volunteer Opportunity Name"
-            android:textColor="@color/black"
-            android:textSize="20sp">
+            android:textColor="@color/dark_water_blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            >
 
 
         </TextView>
@@ -34,9 +38,10 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Short description"
-            android:textColor="@color/black"
+            android:textColor="@color/light_sky_blue"
             android:textSize="16sp"
-
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             >
 
         </TextView>

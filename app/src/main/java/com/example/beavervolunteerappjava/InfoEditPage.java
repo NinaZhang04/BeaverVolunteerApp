@@ -316,7 +316,7 @@ public class InfoEditPage extends AppCompatActivity {
 
 
 
-    public boolean checkPasswordValid(String password){
+    public static boolean checkPasswordValid(String password){
 
         //if password length is smaller than 6, it is a invalid password
         if (password.length() < 6){

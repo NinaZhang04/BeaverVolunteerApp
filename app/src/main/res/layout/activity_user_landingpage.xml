@@ -6,92 +6,110 @@
     android:layout_height="match_parent"
     tools:context=".userLandingPage">
 
-    <TextView
-        android:id="@+id/userLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:text="User: "
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/signedUpPageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="Signed up opportunities"
         app:layout_constraintEnd_toEndOf="@+id/volunteerPageButton"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toStartOf="@+id/volunteerPageButton"
         app:layout_constraintTop_toBottomOf="@+id/volunteerPageButton" />
 
     <Button
-        android:id="@+id/volunteerPageButton"
+        android:id="@+id/userLandingSignOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Volunteer Opportunities"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="4dp"
+        android:text="Sign Out"
+        app:layout_constraintEnd_toEndOf="@+id/aboutTheAppButton"
+        app:layout_constraintHorizontal_bias="0.82"
+        app:layout_constraintStart_toStartOf="@+id/aboutTheAppButton"
+        app:layout_constraintTop_toBottomOf="@+id/aboutTheAppButton" />
 
     <Button
         android:id="@+id/reeditInfoPageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="Edit Personal Information"
         app:layout_constraintEnd_toEndOf="@+id/signedUpPageButton"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="@+id/signedUpPageButton"
         app:layout_constraintTop_toBottomOf="@+id/signedUpPageButton" />
 
-    <TextView
-        android:id="@+id/userName"
+    <Button
+        android:id="@+id/aboutTheAppButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="20dp"
-        android:text="user name"
-        app:layout_constraintStart_toEndOf="@+id/userLabel"
+        android:layout_marginTop="4dp"
+        android:text="About the App"
+        app:layout_constraintEnd_toEndOf="@+id/reeditInfoPageButton"
+        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintStart_toStartOf="@+id/reeditInfoPageButton"
+        app:layout_constraintTop_toBottomOf="@+id/reeditInfoPageButton" />
+
+    <Button
+        android:id="@+id/volunteerPageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="196dp"
+        android:text="Volunteer Opportunities"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.537"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/emailLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="24dp"
         android:text="Email: "
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/tvUserWelcome" />
+
+    <TextView
+        android:id="@+id/tvUserWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="80dp"
+        android:text="Welcome! "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/userEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="32dp"
         android:text="user email"
         app:layout_constraintStart_toEndOf="@+id/emailLabel"
         app:layout_constraintTop_toBottomOf="@+id/userName" />
 
-    <Button
-        android:id="@+id/aboutTheAppButton"
+    <TextView
+        android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="About the App"
-        app:layout_constraintEnd_toEndOf="@+id/reeditInfoPageButton"
-        app:layout_constraintStart_toStartOf="@+id/reeditInfoPageButton"
-        app:layout_constraintTop_toBottomOf="@+id/reeditInfoPageButton" />
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="80dp"
+        android:text="user name"
+        app:layout_constraintStart_toEndOf="@+id/tvUserWelcome"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/userLandingSignOut"
+    <TextView
+        android:id="@+id/tvMyDashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:text="Sign Out"
-        app:layout_constraintEnd_toEndOf="@+id/aboutTheAppButton"
-        app:layout_constraintStart_toStartOf="@+id/aboutTheAppButton"
-        app:layout_constraintTop_toBottomOf="@+id/aboutTheAppButton" />
+        android:text="My DashBoard"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
