@@ -4,45 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightest_shade_blue"
     tools:context=".AboutTheAppPage">
 
     <TextView
         android:id="@+id/backendCoders"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="list of backend coders: Nina Zhang"
+        android:textColor="@color/dark_water_blue"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/aboutTheApp"
         app:layout_constraintStart_toStartOf="@+id/aboutTheApp"
         app:layout_constraintTop_toBottomOf="@+id/aboutTheApp" />
 
     <TextView
         android:id="@+id/aboutTheApp"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/aboutTheApp"
+        android:textColor="@color/dark_water_blue"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/fontendCoders"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="list of frontend coders: \nNina Zhang\nAdrien Chen\nPei Zheng"
+        android:textColor="@color/dark_water_blue"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/backendCoders"
         app:layout_constraintStart_toStartOf="@+id/backendCoders"
         app:layout_constraintTop_toBottomOf="@+id/backendCoders" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="30dp"
         android:text="All volunteer opportunities are provided and \nupdated by BeaverWithU"
+        android:textColor="@color/dark_water_blue"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/fontendCoders"
         app:layout_constraintStart_toStartOf="@+id/fontendCoders"
         app:layout_constraintTop_toBottomOf="@+id/fontendCoders" />
+
+    <TextView
+        android:id="@+id/noteFromDeveloper"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Note from developer: Hello! Hope you are having a great experience using this app! If you have any questions or difficulties with the app, please fill in this form: \n\nhttps://forms.gle/Tns69tSuNLZpavtH6 \n\nand I will reply as soon as possible!"
+        android:textColor="@color/dark_water_blue"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
